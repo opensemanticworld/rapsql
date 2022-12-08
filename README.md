@@ -4,7 +4,7 @@ Containerized service stack 'Restful Age PostgreSQL' (rapsql) as ready to use de
 !!! Do not use this unsafe configuration it in production !!!
 
 ## How to get started ##
-You need to have docker with compose installed on your machine. There are just a few steps to get this rapsql-stack running. Just follow this short instrucitons (=
+You need to have [docker with compose](https://docs.docker.com/get-docker/) installed on your machine. There are just a few steps to get this rapsql-stack running. Just follow this short instrucitons (=
 
 1. Clone this repository 
 2. Configuration
@@ -15,18 +15,19 @@ You need to have docker with compose installed on your machine. There are just a
     3. Since there is no official docker image for apache/age-viewer at this time, you need to build this one one your own. And If you are not familiar with creating your own local docker images or don't want to use age-viewer, you can simply open docker-compose.yml and comment out this service. But don't worry, every necessary step is described below ;)
         1. clone repo https://github.com/apache/age-viewer to a local folder
         2. open docker-compose.yml 
-            1. navigate to age-viewer
-            2. change context "/usr/local/docker/age-viewer/" to your own path
-            3. that's it :)
-3. Open a terminal
-    1. Navigate to your rapsql path
-    2. Use docker compose tool to run the stack (see next section)
+            1. Navigate to age-viewer
+            2. Change context "/usr/local/docker/age-viewer/" to your own path
+            3. And that's it :)
+3. 
 
 ## Docker Commands on CLI
+Open a terminal, navigate to your rapsql path and use docker compose tool to run the stack 
+
 Run the stack 
 ~~~
     docker compose up
 ~~~    
+This command will build and download all missing images from the docker registry. The building step may take a while, once you downloaded all images to your local machine, the command will executed way faster.
 (Optional) Run services in background using "detached" mode (-d flag)
 ~~~
     docker compose up -d
