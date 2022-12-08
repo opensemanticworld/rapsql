@@ -51,7 +51,8 @@ services:
 
   age-viewer:
     build:
-      context: /usr/local/docker/age-viewer/   # set path cloned repo or "https://github.com/apache/age-viewer"
+      # clone repo https://github.com/apache/age-viewer and change context "/usr/local/docker/age-viewer/" to your own <path>
+      context: /usr/local/docker/age-viewer/    # CHANGE THIS
       dockerfile: Dockerfile
     container_name: age-viewer-container
     ports:
