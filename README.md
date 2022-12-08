@@ -23,7 +23,7 @@ You need to have docker with compose installed on your machine. There are just a
     2. Use docker compose tool to start the stack
 ~~~
     docker compose up
-    
+~~~    
 
 ## References
 [PostgREST](https://github.com/PostgREST/postgrest)
