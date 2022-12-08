@@ -18,6 +18,13 @@ You need to have [docker with compose](https://docs.docker.com/get-docker/) inst
             1. Navigate to age-viewer
             2. Change context "/usr/local/docker/age-viewer/" to your own path
             3. And that's it :)
+3. Help supporting the open source community. Leave rapsql and the the other repositories a star if like it ;-)
+
+[PostgREST](https://github.com/PostgREST/postgrest)
+
+[Apache AGE](https://github.com/apache/age/)
+
+[Postgres](https://github.com/postgres/postgres)
 
 ## Docker Commands on CLI
 Once all the pre-settings are complete, we can get the Rapsql stack up and running. Simply open a terminal or shell, navigate to your Rapsql path and use the docker compose tool.
@@ -57,11 +64,7 @@ Delete all containers with volumes using -v flag
 
 ## Services and References
 
-[PostgREST](https://github.com/PostgREST/postgrest)
 
-[Apache AGE](https://github.com/apache/age/)
-
-[Postgres](https://github.com/postgres/postgres)
 
 
          
