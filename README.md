@@ -62,7 +62,9 @@ There is still one thing left... the support of the open source community!
 
 Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if like ;-)
 
-## Feature Development
+## Further Development
+The goal of this project is to enable a drop-in replacement of graph databases with Postgres.
+
 The progress of custum- features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
 
 1. Function for JSON return by a dyanamic_string query as Remote Procedure Call (in work)
