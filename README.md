@@ -66,7 +66,7 @@ Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://git
 The progress of custum- features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
 
 1. Function for JSON return by a dyanamic_string query as Remote Procedure Call (in work)
-2. Research and implementation of a transpiler for SPARQL to Cypher (to do)
+2. Research and implementation of a transpiler module for SPARQL to Cypher (to do)
 
 
 
