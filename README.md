@@ -22,7 +22,7 @@ You need to have [docker with compose](https://docs.docker.com/get-docker/) inst
         2. Navigate to service: swagger
         3. Change the image (see comments) or comment out the hole swagger section, if you don't want to use this unofficial image
 3. And that's it, we're up to deploy the stack (see next section :) 
-4. Sorry one thing left... help supporting the open source community! 
+4. Sorry, there is still one thing left... the support of the open source community!
 
 Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4),[PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and RAPSQL a star if like ;-)
 
