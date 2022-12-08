@@ -20,14 +20,22 @@ You need to have docker with compose installed on your machine. There are just a
             3. that's it :)
 3. Open a terminal
     1. Navigate to your rapsql path
-    2. Use docker compose tool to start the stack
+    2. Use docker compose tool to run the stack (see next section)
+
+## Docker Commands on CLI
+Run the stack with getting
 ~~~
-    docker compose up -d
+    docker compose up
 ~~~    
-(Optional) using detached tag 
+(Optional) Run services in background using "detached" mode (-d flag)
 ~~~
     docker compose up -d
 ~~~  
+See what is currently running
+~~~
+    docker compose ps
+~~~  
+
 
 ## References
 [PostgREST](https://github.com/PostgREST/postgrest)
