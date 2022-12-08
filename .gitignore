@@ -2,3 +2,4 @@
 .env.*
 pgdbconf/postgres.conf
 rapsql.json
+dev/dev.md
