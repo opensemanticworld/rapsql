@@ -23,7 +23,7 @@ You need to have docker with compose installed on your machine. There are just a
     2. Use docker compose tool to run the stack (see next section)
 
 ## Docker Commands on CLI
-Run the stack with getting
+Run the stack 
 ~~~
     docker compose up
 ~~~    
@@ -35,7 +35,22 @@ See what is currently running
 ~~~
     docker compose ps
 ~~~  
-
+Shut down containers
+~~~
+    docker compose stop
+~~~     
+Run the stopped containers again
+~~~
+    docker compose start
+~~~ 
+Delete all containers without docker volumes
+~~~
+    docker compose down
+~~~ 
+Delete all containers with volumes using -v flag
+~~~
+    docker compose down -v
+~~~ 
 
 ## References
 [PostgREST](https://github.com/PostgREST/postgrest)
