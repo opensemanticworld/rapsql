@@ -9,25 +9,23 @@ You need to have [docker with compose](https://docs.docker.com/get-docker/) inst
 1. Clone this repository 
 2. Configuration
     1. Change file name 'dotenv' to '.env'
-    2. (optional) Open .env and change your credentials
+    2. (Optional) Open .env and change your credentials
         1. Note that there are some dependencies to the initial building script in ./pgdbconf/schema.sql
         2. You can find comment tags where changes have no or different dependencies
     3. Since there is no official docker image for apache/age-viewer at this time, you need to build this one one your own. And If you are not familiar with creating your own local docker images or don't want to use age-viewer, you can simply open docker-compose.yml and comment out this service. But don't worry, every necessary step is described below ;)
-        1. clone repo https://github.com/apache/age-viewer to a local folder
-        2. open docker-compose.yml 
-            1. Navigate to age-viewer
-            2. Change context "/usr/local/docker/age-viewer/" to your own path
-            3. And that's it :)
-3. Help supporting the open source community. Leave rapsql and the the other repositories a star if like it ;-)
-
-[PostgREST](https://github.com/PostgREST/postgrest)
-
-[Apache AGE](https://github.com/apache/age/)
-
-[Postgres](https://github.com/postgres/postgres)
+        1. Clone repo https://github.com/apache/age-viewer to a local folder
+        2. Open docker-compose.yml of rapsql
+        3. Navigate to service: age-viewer 
+        4. Change context "/usr/local/docker/age-viewer/" to your choosen local folder path
+    4. (Optional) When your machine has an ARM architecture (e. g. Raspberry Pi) you need to change the swagger image as well
+        1. Open docker-compose.yml of rapsql
+        2. Navigate to service: swagger
+        3. Change the image (see comments) or comment out the hole swagger section, if you don't want to use this unofficial image
+3. And that's it, we're up to deploy the stack (see next section :) 
+4. Sorry one thing left... help supporting the open source community. Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4),[PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and RAPSQL a star if like ;-)
 
 ## Docker Commands on CLI
-Once all the pre-settings are complete, we can get the Rapsql stack up and running. Simply open a terminal or shell, navigate to your Rapsql path and use the docker compose tool.
+Once all the pre-settings are complete, we can get the rapsql stack up and running. Simply open a terminal or your favorite shell, navigate to your rapsql path and use the docker compose tool.
 
 Run the stack 
 ~~~
@@ -60,9 +58,10 @@ Delete all containers with volumes using -v flag
 ~~~ 
 
 ## Features
+1. FunctionGetting JSON return by a dyanamic_string query for Remote Procedure Call (in work)
+2. 
 
-
-## Services and References
+## References
 
 
 

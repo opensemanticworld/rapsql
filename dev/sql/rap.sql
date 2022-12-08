@@ -3,7 +3,7 @@
 /*  Function api.rapsql_query(querystring VARCHAR)
     Author(s):  Andreas Raeder
     Version:    0.1.1
-    Descript.:  Postgrest RPC for json return by using dynamic age cypher query string
+    Descript.:  Postgrest RPC for json return by using dynamic apache age cypher query string
     Hint(s):    No permission to "LOAD 'age';" for REST API yet
                 Can return multiple JSON results of one attribute yet
     ToDo(s):    Specifiy permissions
