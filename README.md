@@ -24,7 +24,7 @@ You need to have [docker with compose](https://docs.docker.com/get-docker/) inst
 3. And that's it, we're up to deploy the stack (see next section :) 
 4. Sorry, there is still one thing left... the support of the open source community!
 
-Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4),[PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and RAPSQL a star if like ;-)
+Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4),[PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if like ;-)
 
 ## Docker Commands on CLI
 Once all the pre-settings are complete, we can get the rapsql stack up and running. Simply open a terminal or your favorite shell, navigate to your rapsql path and use the docker compose tool.
