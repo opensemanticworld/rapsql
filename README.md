@@ -18,10 +18,9 @@ You need to have [docker with compose](https://docs.docker.com/get-docker/) inst
             1. Navigate to age-viewer
             2. Change context "/usr/local/docker/age-viewer/" to your own path
             3. And that's it :)
-3. 
 
 ## Docker Commands on CLI
-Open a terminal, navigate to your rapsql path and use docker compose tool to run the stack 
+When all presettings are done, we're up to get the rapsql stack running. Just open a terminal or shell, navigate to your rapsql path and use docker compose tool.
 
 Run the stack 
 ~~~
