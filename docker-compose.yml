@@ -2,8 +2,6 @@ version: '3'
 
 services:
 
-  # keycloak:
-
   swagger:
     container_name: swagger-container
     image: swaggerapi/swagger-ui:v4.15.2 # for amd64 architecture only

@@ -21,8 +21,9 @@ You need to have docker with compose installed on your machine. There are just a
 3. Open a terminal
     1. Navigate to your rapsql path
     2. Use docker compose tool to start the stack
-        
-docker compose up
+
+
+    docker compose up
     
 
 ## References
