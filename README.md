@@ -94,7 +94,7 @@ You can disconnect and quit this CLI by entering
 ## Web Links ##
 Hopefully everything is working properly now... good job :+1: 
 
-We can open some of our fresh deployed services in a Browser. Maybe you need to change localhost to your machines host-ip or hostname, when using a remote system.
+We can open some of our fresh deployed services :gem: in a Browser. Maybe you need to change localhost to your machines host-ip or hostname, when using a remote system.
 
 Swagger UI for documentation of PostgREST API
 
@@ -137,7 +137,7 @@ Progress of custum- features can be found in [./dev*](https://github.com/OpenSem
 
 
 ## Community ##
-There is still one thing left... support the open source community! :heart:
+There is still one thing left... support the open source community:grey_exclamation: :heart:
 
 Give [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if you like :star2: :heart_eyes:
 
