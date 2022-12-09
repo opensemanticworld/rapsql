@@ -111,7 +111,7 @@ http://localhost:3001/
 ## RAPSQL Features ##
 
 ### Cypher query via REST + JSON response ###
-We can use either curl or swagger if you have this service set up. Here's an example to interact with Swagger UI to perform cypher quieries:
+We can use either curl or swagger if you have this service set up. Here's an example to interact with Swagger UI to perform cypher queries:
 
 1. Open Swagger UI in browser http://localhost:8080/#/(rpc)%20rapsql_query/post_rpc_rapsql_query 
 2. Push button 'Try it out' (on top right of this rpc)
