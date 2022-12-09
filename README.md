@@ -3,7 +3,7 @@ RAPSQL is an acronym for 'Restful Age PostgreSQL'. On the one hand, it serves to
 
 <br>
 <p align="center">
-     <img src="https://github.com/OpenSemanticLab/docker-compose-tests/blob/main/test-rapsql/src/img/rapsql-stack1.png" width="80%" height="80%">
+     <img src="https://github.com/OpenSemanticLab/rapsql/blob/main/docs/img/rapsql-stack1.png" width="80%" height="80%">
 </p>
 <br>
 
