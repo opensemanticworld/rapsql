@@ -92,7 +92,7 @@ You can disconnect and quit this CLI by entering
 ~~~ 
 
 ## Service Web Links ##
-We can open some services in Browser. Maybe you need to change localhost to your machines host-ip or hostname, when using a remote system.
+Hopefully everything is working properly now. We can open some services in Browser. Maybe you need to change localhost to your machines host-ip or hostname, when using a remote system.
 
 Swagger UI for documentation of PostgREST API
 
@@ -111,7 +111,7 @@ http://localhost:3001/
 ## RAPSQL Features ##
 
 ### Cypher query via REST + JSON response ###
-Hopefully everything is working properly now. We can use either curl or swagger if you have this service set up. Here's an example to interact with Swagger UI to perform cypher queries:
+Use either curl or Swagger UI, if you have this service set up. Here's an example to interact with Swagger UI to perform cypher queries:
 
 1. Open Swagger UI in browser http://localhost:8080/#/(rpc)%20rapsql_query/post_rpc_rapsql_query 
 2. Push button 'Try it out' (on top right of this rpc)
