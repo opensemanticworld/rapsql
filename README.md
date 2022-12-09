@@ -136,7 +136,7 @@ Progress of custum rapsql features can be found in [./dev*](https://github.com/O
 3. Drop-in replacemant of an graph database (to do)
 
 
-## Community ##
+## Community and Services ##
 There is still one thing left... support the open source community:grey_exclamation: :heart:
 
 Give [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if you like :star2: :heart_eyes:
