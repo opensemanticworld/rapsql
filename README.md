@@ -32,7 +32,7 @@ Run the stack
 ~~~
     docker compose up
 ~~~    
-This command builds and downloads all missing images from the Docker registry. The build step can take a while. Once you have downloaded all the images to your local machine, the command runs much faster. The deployment of pgdb will run ./pgdbconf/schema.sql initially and doing an open setup for Apache AGE and PostgREST. It will also create a graph called 'countries' and imports vertex and edge data from [.csv files](https://github.com/apache/age/tree/master/regress/age_load/data) that are deliverd by Apache AGE as well. :fireworks::clap:
+This command builds and downloads all missing images from the Docker registry. The build step can take a while. Once you have downloaded all the images to your local machine, the command runs much faster. The deployment of pgdb will run [./pgdbconf/schema.sql](https://github.com/OpenSemanticLab/rapsql/blob/main/pgdbconf/schema.sql) initially and doing an open setup for Apache AGE and PostgREST. It will also create a graph called 'countries' and imports vertex and edge data from [.csv files](https://github.com/apache/age/tree/master/regress/age_load/data) that are deliverd by Apache AGE as well. :fireworks::clap:
 
 (Optional) Run services in background using "detached" mode (-d flag)
 ~~~
