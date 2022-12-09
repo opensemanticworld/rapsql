@@ -22,17 +22,17 @@ You need to have [docker with compose](https://docs.docker.com/get-docker/) inst
         1. Open docker-compose.yml of rapsql
         2. Navigate to service: swagger
         3. Change the image (see comments) or comment out the hole swagger section, if you don't want to use this unofficial image
-3. And that's it, we're up to deploy the stack (see next section :)
+3. And that's it, we're up to deploy the stack (see next section) :sunglasses:
 
 
 ## Docker Commands on CLI ##
-Once all the pre-settings are complete, we can get the rapsql stack up and running. Simply open a terminal or your favorite shell, navigate to your rapsql path and use the docker compose tool.
+Once all the pre-settings are complete, we can get the rapsql stack up and running. Simply open a terminal or your favorite shell, navigate to your rapsql path and use the docker compose tool :muscle:
 
 Run the stack 
 ~~~
     docker compose up
 ~~~    
-This command builds and downloads all missing images from the Docker registry. The build step can take a while. Once you have downloaded all the images to your local machine, the command runs much faster. The deployment of pgdb will run ./pgdbconf/schema.sql initially and doing an open setup for Apache AGE and PostgREST. It will also create a graph called 'countries' and imports vertex and edge data from [.csv files](https://github.com/apache/age/tree/master/regress/age_load/data) that are deliverd by Apache AGE as well.
+This command builds and downloads all missing images from the Docker registry. The build step can take a while. Once you have downloaded all the images to your local machine, the command runs much faster. The deployment of pgdb will run ./pgdbconf/schema.sql initially and doing an open setup for Apache AGE and PostgREST. It will also create a graph called 'countries' and imports vertex and edge data from [.csv files](https://github.com/apache/age/tree/master/regress/age_load/data) that are deliverd by Apache AGE as well. :clap:
 
 (Optional) Run services in background using "detached" mode (-d flag)
 ~~~
@@ -129,4 +129,4 @@ Progress of custum- features can be found in [./dev*](https://github.com/OpenSem
 ## Community ##
 There is still one thing left... the support of the open source community!
 
-Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if you like ;-)
+Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if you like :star2: :heart_eyes:
