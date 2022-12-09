@@ -16,7 +16,7 @@ You already have docker installed? Good news, there are just a few steps to get 
 
 1. Clone this repository to a local folder
 2. Configuration
-    1. Change file name 'dotenv' to '.env'
+    1. Change filename 'dotenv' to '.env'
     2. (Optional) Open .env and change your credentials
         1. Note that there are some dependencies to the initial building script in [./pgdbconf/schema.sql](https://github.com/OpenSemanticLab/rapsql/blob/main/pgdbconf/schema.sql)
         2. You can find comment tags where changes have no or different dependencies
@@ -76,7 +76,7 @@ To interact with postgres in CLI, you can enter your db by using a connection st
 docker exec -it pgdb-container psql "postgres://<POSTGRES_USER>:<POSTGRES_PASSWORD>@<DOCKER_SERVICE_PGDB>:<POSTGRES_PORT>/<POSTGRES_DB>"
 ~~~ 
 
-If you have not made any changes to your credentials after changing the file name from 'dotenv' to '.env', you can just copy the command below:
+If you have not made any changes to your credentials after changing the filename from 'dotenv' to '.env', you can just copy the command below:
 ~~~
 docker exec -it pgdb-container psql "postgres://your.username:rapsqladm@pgdb:5432/rapsql"
 ~~~ 
