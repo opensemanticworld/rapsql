@@ -62,15 +62,15 @@ We can open some services in Browser. Maybe you need to change localhost to your
 
 Swagger UI for documentation of PostgREST API
 
-    http://localhost:8080/
+http://localhost:8080/
 
 pgAdmin4 to interact with Postgres + Apache Age + PostgREST 
     
-    http://localhost:5556/
+http://localhost:5556/
 
 Apache AGE Viewer
     
-    http://localhost:3001/
+http://localhost:3001/
 
 
 ## Usage ##
