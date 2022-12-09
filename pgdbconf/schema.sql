@@ -91,7 +91,7 @@
 
 /*  Function api.rapsql_query(querystring VARCHAR)
     Author(s):  Andreas Raeder
-    Source(s):  ./dev/sql/rap.sql
+    Source(s):  https://github.com/OpenSemanticLab/rapsql/blob/main/dev/sql/rap.sql 
     Version:    0.1.1
     */
     CREATE OR REPLACE FUNCTION api.rapsql_query(querystring VARCHAR)
