@@ -86,7 +86,7 @@ Once you are connected to postgres via CLI you can get information about your se
 \c
 ~~~ 
 
-You can disconnect and quit this CLI by enter this:
+You can disconnect and quit this CLI by entering
 ~~~
 \q
 ~~~ 
