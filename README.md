@@ -82,9 +82,9 @@ We can use either curl or swagger if you have this service set up.
 2. Push button 'Try it out' (on top right of this rpc)
 3. For instance use the following json body and execute this query
 ~~~
-    {
-        "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 100;"
-    }
+{
+    "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 100;"
+}
 ~~~ 
 This function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to build a rich json response object.
 
