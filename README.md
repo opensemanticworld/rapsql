@@ -139,7 +139,7 @@ Progress of custum- features can be found in [./dev*](https://github.com/OpenSem
 ## Community ##
 There is still one thing left... support the open source community! :heart:
 
-Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if you like :star2: :heart_eyes:
+Give [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if you like :star2: :heart_eyes:
 
 ## Discover ##
 This project is based on a feasibility study :mag: as part of the master's program in computer science @ DHBW CAS :mortar_board: and a possible use case of [OpenSemanticLab (OSL)](https://github.com/OpenSemanticLab) @ [Fraunhofer ISC Digital Transformation](https://www.isc.fraunhofer.de/en/fields-of-activity/applications/digital-transformation.html) :microscope:
