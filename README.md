@@ -108,8 +108,9 @@ Apache AGE Viewer
     
 http://localhost:3001/
 
+## RAPSQL Features ##
 
-## Usage ##
+### Usage ###
 We can use either curl or swagger if you have this service set up. Here's an example to interact with Swagger UI to perform cypher quieries:
 
 1. Open Swagger UI in browser http://localhost:8080/#/(rpc)%20rapsql_query/post_rpc_rapsql_query 
@@ -123,7 +124,7 @@ We can use either curl or swagger if you have this service set up. Here's an exa
 This function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to build a richer json response object.
 
 
-## Further Development ##
+### Further Development ###
 The goal of this project is to evaluate drop-in replacements of graph databases with Postgres.
 
 Progress of custum- features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
