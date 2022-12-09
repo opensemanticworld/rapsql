@@ -113,7 +113,7 @@ We can use either curl or swagger if you have this service set up. Here's an exa
     "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 100;"
 }
 ~~~ 
-This function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to build a rich json response object.
+This function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to build a richer json response object.
 
 
 ## Further Development ##
