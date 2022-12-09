@@ -99,9 +99,6 @@ Progress of custum- features can be found in [./dev*](https://github.com/OpenSem
 3. 
 
 
-
-
-
 ## Community ##
 There is still one thing left... the support of the open source community!
 
