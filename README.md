@@ -5,7 +5,7 @@ RAPSQL is a acronym for 'Restful Age PostgreSQL'. On the one hand, it serves to 
 
 
 ## How to get started ##
-You need to have [docker with compose](https://docs.docker.com/get-docker/) :whale: installed on your machine. There are just a few steps to get this rapsql-stack running. Just follow this short instrucitons :point_down:
+First things :one:st...  you need to have [docker with compose](https://docs.docker.com/get-docker/) :whale: installed on your machine. There are just a few steps to get this rapsql-stack running. Just follow this short instrucitons :point_down:
 
 1. Clone this repository to a local folder
 2. Configuration
