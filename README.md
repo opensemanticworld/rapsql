@@ -64,9 +64,11 @@ Swagger UI for documentation of PostgREST API
 
 http://localhost:8080/
 
+
 pgAdmin4 to interact with Postgres + Apache Age + PostgREST 
     
 http://localhost:5556/
+
 
 Apache AGE Viewer
     
@@ -77,7 +79,7 @@ http://localhost:3001/
 We can use either curl or swagger if you have this service set up.
 
 1. Open Swagger UI in browser http://localhost:8080/#/(rpc)%20rapsql_query/post_rpc_rapsql_query 
-2. Push button 'Try it out' (on top right of this rpc), for instance 
+2. Push button 'Try it out' (on top right of this rpc)
 3. For instance use the following json body and execute this query
 ~~~
     {
@@ -85,9 +87,6 @@ We can use either curl or swagger if you have this service set up.
     }
 ~~~ 
 This function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to build a rich json response object.
-
-
-
 
 
 ## Further Development
