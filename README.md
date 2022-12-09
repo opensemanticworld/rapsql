@@ -115,7 +115,7 @@ Hopefully everything is working properly now. We can use either curl or swagger 
 
 1. Open Swagger UI in browser http://localhost:8080/#/(rpc)%20rapsql_query/post_rpc_rapsql_query 
 2. Push button 'Try it out' (on top right of this rpc)
-3. For instance use the following json body and execute this query
+3. For instance use the json body below and execute this query
 ~~~
 {
     "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 100;"
