@@ -22,11 +22,11 @@ You already have docker installed? Good news, there are just a few steps to get 
         2. You can find comment tags where changes have no or different dependencies
     3. Since there is no official docker image for apache/age-viewer at this time, you need to build this one your own. And If you are not familiar with creating your own local docker images or don't want to use age-viewer, you can simply open docker-compose.yml and comment out this service. But don't worry, every necessary step is described below :relaxed:
         1. Clone repo https://github.com/apache/age-viewer to another local folder
-        2. Open docker-compose.yml of rapsql
+        2. Open docker-compose.yml of your local rapsql
         3. Navigate to service: age-viewer 
         4. Change context "/usr/local/docker/age-viewer/" to your choosen local folder path of age-viewer
     4. (ARM architecture only) E. g. on Raspberry Pi, you need to change the swagger image as well
-        1. Open docker-compose.yml of rapsql
+        1. Open docker-compose.yml of your local rapsql
         2. Navigate to service: swagger
         3. Change the image (see comments) or comment out the hole swagger section, if you don't want to use this unofficial image
 3. And that's it, we're up to deploy the stack (see next section) :sunglasses:
