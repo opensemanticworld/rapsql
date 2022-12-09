@@ -18,7 +18,7 @@ You already have docker installed? Good news, there are just a few steps to get 
 2. Configuration
     1. Change file name 'dotenv' to '.env'
     2. (Optional) Open .env and change your credentials
-        1. Note that there are some dependencies to the initial building script in ./pgdbconf/schema.sql
+        1. Note that there are some dependencies to the initial building script in [./pgdbconf/schema.sql](https://github.com/OpenSemanticLab/rapsql/blob/main/pgdbconf/schema.sql)
         2. You can find comment tags where changes have no or different dependencies
     3. Since there is no official docker image for apache/age-viewer at this time, you need to build this one your own. And If you are not familiar with creating your own local docker images or don't want to use age-viewer, you can simply open docker-compose.yml and comment out this service. But don't worry, every necessary step is described below :relaxed:
         1. Clone repo https://github.com/apache/age-viewer to another local folder
