@@ -92,7 +92,9 @@ You can disconnect and quit this CLI by entering
 ~~~ 
 
 ## Service Web Links ##
-Hopefully everything is working properly now. We can open some services in Browser. Maybe you need to change localhost to your machines host-ip or hostname, when using a remote system.
+Hopefully everything is working properly now... good job :+1: 
+
+We can open some services in Browser. Maybe you need to change localhost to your machines host-ip or hostname, when using a remote system.
 
 Swagger UI for documentation of PostgREST API
 
