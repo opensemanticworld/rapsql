@@ -1,7 +1,7 @@
 # rapsql #
 !!! For DEV purposes only, do not use in production with insecure credentials and privileges !!!
 
-RAPSQL is a pseudonym for 'Restful Age PostgreSQL'. On the one hand, it serves to provide a ready-to-use stack to a public community for the further development of open source database services. On the other hand, features like rest-compatible queries for Apache AGE Cypher queries are implemented (currently in progress). Other features that are being developed as part of a feasibility study on the interoperability of graph databases using SPARQL with Apache AGE will also be added to this repo in the future.
+RAPSQL is a acronym for 'Restful Age PostgreSQL'. On the one hand, it serves to provide a ready-to-use stack to a public community for the further development of open source database services. On the other hand, features like rest-compatible queries for Apache AGE Cypher queries are implemented (currently in progress). Other features that are being developed as part of a feasibility study on the interoperability of graph databases using SPARQL with Apache AGE will also be added to this repo in the future.
 
 ## How to get started ##
 You need to have [docker with compose](https://docs.docker.com/get-docker/) installed on your machine. There are just a few steps to get this rapsql-stack running. Just follow this short instrucitons (=
