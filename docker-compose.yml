@@ -58,7 +58,7 @@ services:
     image: rapsql/age-viewer:v1.0.0-rc2  
     container_name: age-viewer-container
     ports:
-      - "3001:3001"
+      - "${AGEVIEWER_PORT}:3001"
     restart: unless-stopped
 
   pgdb:

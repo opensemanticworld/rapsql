@@ -23,7 +23,7 @@ You need to have [docker with compose](https://docs.docker.com/get-docker/) inst
         3. Change the image (see comments) or comment out the hole swagger section, if you don't want to use this unofficial image
 3. And that's it, we're up to deploy the stack (see next section :) 
 
-## Docker Commands on CLI
+## Docker Commands on CLI ##
 Once all the pre-settings are complete, we can get the rapsql stack up and running. Simply open a terminal or your favorite shell, navigate to your rapsql path and use the docker compose tool.
 
 Run the stack 
@@ -57,21 +57,53 @@ Delete all containers with volumes using -v flag
     docker compose down -v
 ~~~ 
 
-## Community
-There is still one thing left... the support of the open source community!
+## Service Links
+We can open some services in Browser. Maybe you need to change localhost to your machines host-ip or hostname, when using a remote system.
 
-Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if like ;-)
+Swagger UI for documentation of PostgREST API
+
+    http://localhost:8080/
+
+pgAdmin4 to interact with Postgres + Apache Age + PostgREST 
+    
+    http://localhost:5556/
+
+Apache AGE Viewer
+    
+    http://localhost:3001/
+
+
+## Usage ##
+We can use either curl or swagger if you have this service set up.
+
+1. Open Swagger UI in browser http://localhost:8080/#/(rpc)%20rapsql_query/post_rpc_rapsql_query 
+2. Push button 'Try it out' (on top right of this rpc), for instance 
+3. For instance use the following json body and execute this query
+~~~
+    {
+        "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 100;"
+    }
+~~~ 
+This function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to build a rich json response object.
+
+
+
+
 
 ## Further Development
-The goal of this project is to enable a drop-in replacement of graph databases with Postgres.
+The goal of this project is to evaluate drop-in replacements of graph databases with Postgres.
 
-The progress of custum- features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
+Progress of custum- features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
 
 1. Function for JSON return by a dyanamic_string query as Remote Procedure Call (in work)
 2. Research and implementation of a transpiler module for SPARQL to Cypher (to do)
+3. 
 
 
 
 
 
-         
+## Community ##
+There is still one thing left... the support of the open source community!
+
+Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if like ;-)
