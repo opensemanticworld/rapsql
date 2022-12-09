@@ -1,28 +1,29 @@
-; dotenv | Author(s): Andreas Raeder ;
-;;; UNSAFE, CHANGE CREDENTIALS AND FILENAME TO .env ;;;
+# dotenv -> .env | Author(s): Andreas Raeder #
+# UNSAFE, CHANGE CREDENTIALS AND FILENAME TO .env ###
 
-; SWAGGER
+# SWAGGER
 SWAGGER_PORT = 8080
 
-; PGRST
+#  PGRST
 PGRST_PORT = 3000
-PGRST_USER = authenticator              ; Changes must also be made in pgdbconf/schema.sql
-PGRST_PASSWORD = pgrestauth             ; Changes must also be made in pgdbconf/schema.sql
+PGRST_USER = authenticator              # Dependency in pgdbconf/schema.sql
+PGRST_PASSWORD = pgrestauth             # Dependency in pgdbconf/schema.sql
 
-; change localhost to host-ip or hostname, 
-; when using a remote machine (without port, when e. g. nginx exposes this port)
+# change localhost to host-ip or hostname, 
+# when using a remote machine (without port, when e. g. nginx exposes this port)
 PGRST_OPENAPI_SERVER_PROXY_URI = http://localhost:3000 
 
-PGRST_DB_SCHEMAS = api                  ; Changes must also be made in pgdbconf/schema.sql
-PGRST_DB_ANON_ROLE = web_anon           ; Changes must also be made in pgdbconf/schema.sql
+PGRST_DB_SCHEMAS = api                  # Dependency in pgdbconf/schema.sql
+PGRST_DB_ANON_ROLE = web_anon           # Dependency in pgdbconf/schema.sql
 
-; PGADM
+# PGADM
 PDADMIN_PORT = 5556
-PGADMIN_DEFAULT_EMAIL = your@email.com  ; CHANGE THIS
-PGADMIN_DEFAULT_PW = rapsqladm          ; CHANGE THIS
+PGADMIN_DEFAULT_EMAIL = your@email.com  # CHANGE THIS
+PGADMIN_DEFAULT_PW = rapsqladm          # CHANGE THIS
 
-; PGDB
+# PGDB
 POSTGRES_PORT = 5432
-POSTGRES_USER = your.username           ; CHANGE THIS
-POSTGRES_PASSWORD = rapsqladm           ; CHANGE THIS
-POSTGRES_DB = rapsql                    ; Changes must also be made in pgdbconf/schema.sql
+POSTGRES_USER = your.username           # CHANGE THIS
+POSTGRES_PASSWORD = rapsqladm           # CHANGE THIS
+POSTGRES_DB = rapsql                    # Dependency in pgdbconf/schema.sql
+
