@@ -17,7 +17,7 @@ First things :one:st...  you need to have [docker with compose](https://docs.doc
         1. Clone repo https://github.com/apache/age-viewer to another local folder
         2. Open docker-compose.yml of rapsql
         3. Navigate to service: age-viewer 
-        4. Change context "/usr/local/docker/age-viewer/" to your choosen local folder path
+        4. Change context "/usr/local/docker/age-viewer/" to your choosen local folder path of age-viewer
     4. (Optional) When your machine has an ARM architecture (e. g. Raspberry Pi) you need to change the swagger image as well
         1. Open docker-compose.yml of rapsql
         2. Navigate to service: swagger
