@@ -74,7 +74,7 @@ If you have not made any changes to your credentials after changing the file nam
 docker exec -it pgdb-container psql "postgres://your.username:rapsqladm@pgdb:5432/rapsql"
 ~~~ 
 
-Once you connected to postgres via CLI you can get information about your session by entering
+Once you are connected to postgres via CLI you can get information about your session by entering
 ~~~
 \c
 ~~~ 
@@ -84,7 +84,7 @@ You can disconnect and quit this CLI by enter this:
 \q
 ~~~ 
 
-## Service Links ##
+## Service Web Links ##
 We can open some services in Browser. Maybe you need to change localhost to your machines host-ip or hostname, when using a remote system.
 
 Swagger UI for documentation of PostgREST API
