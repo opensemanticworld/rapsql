@@ -123,13 +123,13 @@ Use either curl or Swagger UI, if you have this service set up. Here's an exampl
     "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 100;"
 }
 ~~~ 
-This user defined function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to get a richer json response object.
+This user defined function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to get a richer JSON response object.
 
 
 ### Further Development ###
 The goal of this project is to evaluate drop-in replacements of graph databases with Postgres.
 
-Progress of custum- features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
+Progress of custum rapsql features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
 
 1. Function for JSON return by a dyanamic_string query as Remote Procedure Call (in work)
 2. Research and implementation of a transpiler module for SPARQL to Cypher (to do)
