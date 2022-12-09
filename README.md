@@ -12,7 +12,7 @@ RAPSQL is an acronym for 'Restful Age PostgreSQL'. On the one hand, it serves to
 ## How to get started ##
 First things :one:st...  you need to have [docker with compose](https://docs.docker.com/get-docker/) :whale: installed on your machine. 
 
-You already have docker installed? Good news, there are just a few steps to get this rapsql-stack running. Just follow this short instrucitons :point_down:
+You already have docker installed? Good news, there are just a few steps to get this rapsql-stack running. Just follow this short instructions :point_down:
 
 1. Clone this repository to a local folder
 2. Configuration
@@ -24,7 +24,7 @@ You already have docker installed? Good news, there are just a few steps to get 
         1. Clone repo https://github.com/apache/age-viewer to another local folder
         2. Open docker-compose.yml of your local rapsql
         3. Navigate to service: age-viewer 
-        4. Change context "/usr/local/docker/age-viewer/" to your choosen local folder path of age-viewer
+        4. Change context "/usr/local/docker/age-viewer/" to your chosen local folder path of age-viewer
     4. (ARM architecture only) E. g. on Raspberry Pi, you need to change the swagger image as well
         1. Open docker-compose.yml of your local rapsql
         2. Navigate to service: swagger
@@ -39,7 +39,7 @@ Run the stack
 ~~~
     docker compose up
 ~~~    
-This command builds and downloads all missing images from the Docker registry. The initial building step can take a few minutes. Once you have downloaded all the images to your local machine, the command runs in a few seconds. The deployment of pgdb will run [./pgdbconf/schema.sql](https://github.com/OpenSemanticLab/rapsql/blob/main/pgdbconf/schema.sql) initially and doing an open setup for [Apache AGE](https://github.com/apache/age/) and [PostgREST](https://github.com/PostgREST/postgrest). It will also create a graph called 'countries' and imports vertex and edge data from [.csv files](https://github.com/apache/age/tree/master/regress/age_load/data) that are deliverd by [Apache AGE](https://github.com/apache/age/) as well. :fireworks::clap:
+This command builds and downloads all missing images from the Docker registry. The initial building step can take a few minutes. Once you have downloaded all the images to your local machine, the command runs in a few seconds. The deployment of pgdb will run [./pgdbconf/schema.sql](https://github.com/OpenSemanticLab/rapsql/blob/main/pgdbconf/schema.sql) initially and doing an open setup for [Apache AGE](https://github.com/apache/age/) and [PostgREST](https://github.com/PostgREST/postgrest). It will also create a graph called 'countries' and imports vertex and edge data from [.csv files](https://github.com/apache/age/tree/master/regress/age_load/data) that are delivered by [Apache AGE](https://github.com/apache/age/) as well. :fireworks::clap:
 
 (Optional) Run services in background using "detached" mode (-d flag)
 ~~~
@@ -71,7 +71,7 @@ Delete all containers with volumes using -v flag
     docker compose down -v
 ~~~ 
 
-To interact with postgres in CLI, you can enter your db by using a connection string with your credentials like this:
+To interact with postgres in CLI, you can enter your db by using a connection string with your credentials like this (the container name may vary on your machine):
 ~~~
 docker exec -it pgdb-container psql "postgres://<POSTGRES_USER>:<POSTGRES_PASSWORD>@<DOCKER_SERVICE_PGDB>:<POSTGRES_PORT>/<POSTGRES_DB>"
 ~~~ 
@@ -129,11 +129,11 @@ This user defined function works for multiple rows of just one attribute (column
 ### Further Development ###
 The goal of this project is to evaluate drop-in replacements of graph databases with Postgres.
 
-Progress of custum rapsql features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
+Progress of custom rapsql features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
 
-1. Function for JSON return by a dyanamic_string query as Remote Procedure Call (in work)
+1. Function for JSON return by a dynamic string query as Remote Procedure Call (in work)
 2. Research and implementation of a transpiler module for SPARQL to Cypher (to do)
-3. Drop-in replacemant of an graph database (to do)
+3. Drop-in replacement for a SPARQL triplestore (to do)
 
 
 ## Community and Services ##
