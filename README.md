@@ -5,7 +5,7 @@ RAPSQL is a acronym for 'Restful Age PostgreSQL'. On the one hand, it serves to 
 
 
 ## How to get started ##
-You need to have [docker with compose](https://docs.docker.com/get-docker/) installed on your machine. There are just a few steps to get this rapsql-stack running. Just follow this short instrucitons (=
+You need to have [docker with compose](https://docs.docker.com/get-docker/) :whale: installed on your machine. There are just a few steps to get this rapsql-stack running. Just follow this short instrucitons :point_down:
 
 1. Clone this repository to a local folder
 2. Configuration
@@ -32,7 +32,7 @@ Run the stack
 ~~~
     docker compose up
 ~~~    
-This command builds and downloads all missing images from the Docker registry. The build step can take a while. Once you have downloaded all the images to your local machine, the command runs much faster. The deployment of pgdb will run ./pgdbconf/schema.sql initially and doing an open setup for Apache AGE and PostgREST. It will also create a graph called 'countries' and imports vertex and edge data from [.csv files](https://github.com/apache/age/tree/master/regress/age_load/data) that are deliverd by Apache AGE as well. :clap:
+This command builds and downloads all missing images from the Docker registry. The build step can take a while. Once you have downloaded all the images to your local machine, the command runs much faster. The deployment of pgdb will run ./pgdbconf/schema.sql initially and doing an open setup for Apache AGE and PostgREST. It will also create a graph called 'countries' and imports vertex and edge data from [.csv files](https://github.com/apache/age/tree/master/regress/age_load/data) that are deliverd by Apache AGE as well. :fireworks::clap:
 
 (Optional) Run services in background using "detached" mode (-d flag)
 ~~~
@@ -127,6 +127,6 @@ Progress of custum- features can be found in [./dev*](https://github.com/OpenSem
 
 
 ## Community ##
-There is still one thing left... the support of the open source community!
+There is still one thing left... the support of the open source community! :heart:
 
 Leave [Postgres](https://github.com/postgres/postgres), [Apache AGE](https://github.com/apache/age/), [Apache AGE Viewer](https://github.com/apache/age-viewer), [pgAdmin 4](https://github.com/pgadmin-org/pgadmin4), [PostgREST](https://github.com/PostgREST/postgrest), [Swagger-UI](https://github.com/swagger-api/swagger-ui) and [RAPSQL](https://github.com/OpenSemanticLab/rapsql/) a star if you like :star2: :heart_eyes:
