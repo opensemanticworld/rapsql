@@ -3,6 +3,12 @@
 
 RAPSQL is a acronym for 'Restful Age PostgreSQL'. On the one hand, it serves to provide a ready-to-use stack to a public community for the further development of open source database services. On the other hand, features like rest-compatible queries for Apache AGE Cypher queries are implemented (currently in progress :construction:). Other features that are being developed as part of a feasibility study on the interoperability of graph databases using SPARQL with Apache AGE will also be added to this repo in the future. :hourglass:
 
+<br>
+<p align="center">
+     <img src="https://github.com/OpenSemanticLab/docker-compose-tests/blob/main/test-rapsql/src/img/rapsql-stack1.png" width="60%" height="60%">
+</p>
+<br>
+
 
 ## How to get started ##
 First things :one:st...  you need to have [docker with compose](https://docs.docker.com/get-docker/) :whale: installed on your machine. 
