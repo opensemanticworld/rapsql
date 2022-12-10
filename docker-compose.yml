@@ -42,7 +42,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PW}
     volumes:
       - pgadmin:/var/lib/pgadmin
-      - ./rapsql.json:/pgadmin4/servers.json
+      # - ./rapsql.json:/pgadmin4/servers.json
     restart: unless-stopped
     depends_on:
       - pgdb
