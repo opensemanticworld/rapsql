@@ -48,7 +48,7 @@ services:
       - pgdb
 
   # follow readme instructions or
-  # comment out this service, if u're not familiar with building docker images or follow instructions
+  # comment out this service, if u're not familiar with building docker images 
   age-viewer:
     build:
       # clone repo: https://github.com/apache/age-viewer and change context to your own local path
