@@ -86,6 +86,9 @@
     GRANT ALL PRIVILEGES ON SCHEMA ag_catalog TO web_anon;
     GRANT SELECT ON countries._ag_label_vertex TO web_anon;
     GRANT SELECT ON countries._ag_label_edge TO web_anon;
+    GRANT SELECT ON countries."Country" TO web_anon;
+    GRANT SELECT ON countries."City" TO web_anon;
+    GRANT SELECT ON countries."has_city" TO web_anon;
     /* End: Access control 
 */
 
