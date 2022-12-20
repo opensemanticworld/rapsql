@@ -12,6 +12,7 @@ services:
       - "${SWAGGER_PORT}"
     environment:
       API_URL: "${PGRST_OPENAPI_SERVER_PROXY_URI}"
+      VALIDATOR_URL: "localhost"
     restart: unless-stopped
     depends_on:
       - pgrst
@@ -42,7 +43,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PW}
     volumes:
       - pgadmin:/var/lib/pgadmin
-      # - ./rapsql.json:/pgadmin4/servers.json
+      - ./rapsql.json:/pgadmin4/servers.json
     restart: unless-stopped
     depends_on:
       - pgdb
