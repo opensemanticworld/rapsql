@@ -118,12 +118,19 @@ Use either curl or Swagger UI, if you have this service set up. Here's an exampl
 1. Open Swagger UI in browser http://localhost:8080/#/(rpc)%20rapsql_query/post_rpc_rapsql_query 
 2. Push button 'Try it out' (on top right of this rpc)
 3. For instance use the json body below and execute this query
+for single attribute response
 ~~~
 {
     "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 100;"
 }
 ~~~ 
-This user defined function works for multiple rows of just one attribute (column) yet. I'm currently working on building multiple attributes by given agtypes to get a richer JSON response object.
+or multiple attribute response
+~~~
+{
+    "querystring": "SELECT * FROM cypher('countries', $$ MATCH (country {name: 'Norway'})<-[r]-(city) RETURN properties(country), city.name $$) as (country agtype, city agtype) LIMIT 100"
+}
+~~~
+This user defined function works for multiple attributes (columns). It is still experimental and tests of different edge cases need to be evaluated.
 
 
 ### Further Development ###
@@ -131,7 +138,7 @@ The goal of this project is to evaluate drop-in replacements of graph databases 
 
 Progress of custom rapsql features can be found in [./dev*](https://github.com/OpenSemanticLab/rapsql/tree/main/dev).
 
-1. Function for JSON return by a dynamic string query as Remote Procedure Call (in work)
+1. Function for JSON return by a dynamic string query as Remote Procedure Call (done but experimental)
 2. Research and implementation of a transpiler module for SPARQL to Cypher (to do)
 3. Drop-in replacement for a SPARQL triplestore (to do)
 
