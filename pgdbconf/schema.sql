@@ -105,7 +105,7 @@
         sql_agtype VARCHAR;
     BEGIN
         SET search_path TO ag_catalog;
-        sql_agtype := format('SELECT (to_json(replace(replace(replace(replace((row_to_json(t))::text, ''\"'', ''"''), ''"{'', ''{''), ''}"'', ''}''), ''""'', ''"'')) #>> ''{}'')::JSON FROM (%s) t;', querystring);
+        sql_agtype := format('SELECT (to_json(replace(replace(replace(replace(replace(replace(replace(replace((row_to_json(t))::text,''}::vertex'', '', "_type":"::vertex"}''), ''}::edge'', '', "_type":"::edge"}''), ''::path'', '', "_type":"::path"''), ''"['', ''[''), ''\"'', ''"''), ''"{'', ''{''), ''}"'', ''}''), ''""'', ''"'')) #>> ''{}'')::JSON FROM (%s) t;', querystring);
         RETURN QUERY EXECUTE sql_agtype;
     END
     $function$;
