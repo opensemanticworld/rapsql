@@ -11,12 +11,12 @@
     Usage:      
                 Directed relation, n attributes
                     {
-                        "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 3"
+                        "querystring": "SELECT * FROM cypher('countries', $$ MATCH (country {currency: 'EUR'})<-[r]-(city) RETURN country.name, city.name $$) as (_country agtype, _city agtype) LIMIT 100"
                     }
 
                 AGE type ::vertex
                     {
-                        "querystring": "SELECT * FROM cypher('countries', $$ MATCH (country {name: 'Germany'})<-[r]-(city) RETURN properties(country), city.name $$) as (_country agtype, _city agtype) LIMIT 100"
+                        "querystring": "SELECT * FROM cypher('countries', $$ MATCH (v) RETURN (v) $$) as (_result ag_catalog.agtype) LIMIT 3"
                     }
 
                 AGE type ::edge
