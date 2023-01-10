@@ -117,20 +117,33 @@ Use either curl or Swagger UI, if you have this service set up. Here's an exampl
 
 1. Open Swagger UI in browser http://localhost:8080/#/(rpc)%20rapsql_query/post_rpc_rapsql_query 
 2. Push button 'Try it out' (on top right of this rpc)
-3. For instance use the json body below and execute this query
-for single attribute response
+3. For instance use one of the JSON bodies below and execute 
+
+Directed relation, n attributes
 ~~~
 {
-    "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 100;"
+    "querystring": "SELECT * FROM cypher('countries', $$ MATCH (e) RETURN properties(e) $$) AS (properties agtype) LIMIT 3"
 }
-~~~ 
-or multiple attribute response
+~~~
+AGE type ::vertex
 ~~~
 {
-    "querystring": "SELECT * FROM cypher('countries', $$ MATCH (country {name: 'Norway'})<-[r]-(city) RETURN properties(country), city.name $$) as (country agtype, city agtype) LIMIT 100"
+    "querystring": "SELECT * FROM cypher('countries', $$ MATCH (country {name: 'Germany'})<-[r]-(city) RETURN properties(country), city.name $$) as (_country agtype, _city agtype) LIMIT 100"
 }
 ~~~
-This user defined function works for multiple attributes (columns). It is still experimental and tests of different edge cases need to be evaluated.
+AGE type ::edge
+~~~
+{
+    "querystring": "SELECT * FROM cypher('countries', $$ MATCH (country)<-[e]-(city) RETURN (e) $$) as (_result agtype) LIMIT 3"
+}
+~~~
+AGE type ::path ([modified test code from AGE](https://age.apache.org/age-manual/master/intro/types.html#path) )
+~~~
+{
+    "querystring": "SELECT * FROM cypher('countries', $$ WITH [{id: 0, label: 'label_name_1', properties: {i: 0}}::vertex, {id: 2, start_id: 0, end_id: 1, label: 'edge_label', properties: {i: 0}}::edge, {id: 1, label: 'label_name_2', properties: {}}::vertex]::path as p RETURN p $$) AS (_result agtype)"
+}
+~~~
+This user defined function works for multiple results of attributes and rows. Different agtype's like ::vertex, ::edge, or ::path will be expanded in JSON as _type result.
 
 
 ### Further Development ###
