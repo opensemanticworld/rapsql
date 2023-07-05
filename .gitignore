@@ -4,3 +4,4 @@ pgdbconf/postgres.conf
 rapsql.json
 dev/dev.md
 dev/test/*
+docs/info
