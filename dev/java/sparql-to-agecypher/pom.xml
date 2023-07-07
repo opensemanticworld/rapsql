@@ -1,0 +1,130 @@
+<!--
+   Copyright 2023 Andreas Räder
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <!-- project specification settings -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.rapsql.s2agec</groupId>
+  <artifactId>s2agec</artifactId>
+  <version>0.1.0</version>
+  <packaging>jar</packaging>
+  <name>s2agec</name>
+
+  <!-- encoding and compiler properties -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+
+  <!-- maven repository dependencies -->
+  <dependencies>
+    <!-- PL/Java annotations (!not in public maven repo, local programming requires install from https://github.com/tada/pljava/tree/REL1_5_STABLE/pljava-api) -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>pljava-api</artifactId>
+      <version>1.5-SNAPSHOT</version>
+    </dependency>
+    <!-- jena SPARQL algebra library -->
+    <dependency>
+      <groupId>org.apache.jena</groupId>
+      <artifactId>apache-jena-libs</artifactId>
+      <type>pom</type>
+      <version>4.7.0</version>
+    </dependency>   
+    <!-- JDBC -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.5.4</version>
+    </dependency>
+    <!-- JUnit tests -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.9.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>5.9.2</version>
+      <scope>test</scope>
+    </dependency> 
+    <!-- logger binding -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.36</version>
+    </dependency>    
+  </dependencies> 
+
+  <!-- build and plugins settings -->
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.4.2</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>de.rapsql.s2agec.Main</mainClass>
+                  <addClasspath>true</addClasspath>
+                  <classpathPrefix>lib</classpathPrefix>
+                  <addDefaultImplementationEntries>
+                    true
+                  </addDefaultImplementationEntries>
+                </manifest>
+                <manifestSections>
+                  <manifestSection>
+                    <name>pljava.ddr</name>
+                    <manifestEntries>
+                      <SQLJDeploymentDescriptor>
+                        true
+                      </SQLJDeploymentDescriptor>
+                    </manifestEntries>
+                  </manifestSection>
+                </manifestSections>                    
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

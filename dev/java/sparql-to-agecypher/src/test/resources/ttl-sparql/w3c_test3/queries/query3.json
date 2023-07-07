@@ -1,0 +1,4 @@
+{
+  "graph_name": "rdf",
+  "sparql_query": "SELECT ?v WHERE { ?v ?p 42 }"
+}
