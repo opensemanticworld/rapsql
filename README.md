@@ -1,4 +1,5 @@
-# rapsql #
+# rapsql - UNDER CONSTRUCTION
+
 RAPSQL is an acronym for 'Restful Age PostgreSQL'. On the one hand, it serves to provide a ready-to-use stack to a public community for the further development of open source database services. On the other hand, features like REST-compatible requests using [PostgREST](https://github.com/PostgREST/postgrest) for [Apache AGE](https://github.com/apache/age/) Cypher queries are implemented (currently in progress :construction:). Other features that are being developed as part of a feasibility study on the interoperability of graph databases using SPARQL with [Apache AGE](https://github.com/apache/age/) will also be added to this repo in the future :hourglass:
 
 <br>
