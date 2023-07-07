@@ -3,7 +3,7 @@
 pgdbconf/postgres.conf
 rapsql.json
 dev/dev.md
-dev/test/*
+dev/test-queries/*
 /dev/java/sparql-to-agecypher/target/
 /dev/java/sparql-to-agecypher/.vscode
 /dev/java/sparql-to-agecypher/sparql-to-agecypher.code-workspace
