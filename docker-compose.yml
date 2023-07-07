@@ -1,84 +1,64 @@
-version: '3'
+version: "3"
 
-services:
+services: 
+  # TODO: add age-viewer as git submodule
+  # age-viewer: # database ui
+  #   build:
+  #     context: ./dev/age-viewer/
+  #     dockerfile: Dockerfile.AgeViewer
+  #   image: rapsql/ageviewer:0.0.1
+  #   container_name: ageviewer-container3
+  #   ports:
+  #     - "${AGEVIEWER_PORT}:3001"
+  #   restart: unless-stopped
 
-  swagger:
+  swagger: # api ui
     container_name: swagger-container
-    image: swaggerapi/swagger-ui:v4.15.2 # for amd64 architecture only
-    # image: pentusha/swagger-ui-crossbuild # workaround for arm64 architecture
+    image: swaggerapi/swagger-ui:v4.15.2 # (!amd64 architecture only)
     ports:
       - "${SWAGGER_PORT}:8080"
     expose:
       - "${SWAGGER_PORT}"
     environment:
       API_URL: "${PGRST_OPENAPI_SERVER_PROXY_URI}"
-      VALIDATOR_URL: "localhost"
+      VALIDATOR_URL: "localhost"  # (!prevent invalid request intranet)
     restart: unless-stopped
     depends_on:
       - pgrst
 
-  pgrst:
+  pgrst: # database rest api
     container_name: pgrst-container
     image: postgrest/postgrest:v10.1.0
     ports:
       - "${PGRST_PORT}:3000"
     environment:
-      PGRST_DB_URI: postgres://${PGRST_USER}:${PGRST_PASSWORD}@pgdb:${POSTGRES_PORT}/${POSTGRES_DB}
+      PGRST_DB_URI: postgres://${PGRST_USER}:${PGRST_PASSWORD}@rapsqldb:${POSTGRES_PORT}/${POSTGRES_DB}
       PGRST_OPENAPI_SERVER_PROXY_URI: ${PGRST_OPENAPI_SERVER_PROXY_URI}
       PGRST_DB_SCHEMAS: ${PGRST_DB_SCHEMAS}
       PGRST_DB_ANON_ROLE: ${PGRST_DB_ANON_ROLE}
-      # PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
-      # PGRST_DB_PRE_REQUEST: ${PGRST_DB_PRE_REQUEST}
+      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+      PGRST_OPENAPI_SECURITY_ACTIVE: ${PGRST_OPENAPI_SECURITY_ACTIVE}
+      # PGRST_DB_PRE_REQUEST: ${PGRST_DB_PRE_REQUEST} # (!unused see .env)
     restart: unless-stopped
     depends_on:
-      - pgdb
+      - rapsqldb
 
-  pgadmin:
-    container_name: pgadmin-container
-    image: dpage/pgadmin4:6.16
-    ports:
-      - "${PDADMIN_PORT}:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PW}
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-      # - ./rapsql.json:/pgadmin4/servers.json
-    restart: unless-stopped
-    depends_on:
-      - pgdb
-
-  # follow readme instructions or
-  # comment out this service, if u're not familiar with building docker images 
-  age-viewer:
+  rapsqldb: # enhanced postgresql database
     build:
-      # clone repo: https://github.com/apache/age-viewer and change context to your own local path
-      context: /usr/local/docker/age-viewer/  
+      context: .
       dockerfile: Dockerfile
-    # version optional: depending on building time, see https://github.com/apache/age-viewer/tags  
-    image: rapsql/age-viewer:v1.0.0-rc2  
-    container_name: age-viewer-container
-    ports:
-      - "${AGEVIEWER_PORT}:3001"
-    restart: unless-stopped
-
-  pgdb:
-    container_name: pgdb-container
-    image: apache/age:v1.1.0
+    image: rapsql/pg-age-pljava:v0.1.0
+    container_name: rapsqldb-container
     ports:
       - "${POSTGRES_PORT}:5432"
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+
     volumes:
-      # - ./pgdbconf/postgres.conf:/etc/postgresql/postgresql.conf
-      - ./pgdbconf/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - pgdata:/var/lib/postgresql/data
-      # - ./pgdata:/var/lib/postgresql/data
-    # command: postgres -c config_file=/etc/postgresql/postgresql.conf
+      - rapsqldata:/var/lib/postgresql/data
     restart: unless-stopped
 
 volumes:
-  pgadmin: {}
-  pgdata: {}
+  rapsqldata: {}

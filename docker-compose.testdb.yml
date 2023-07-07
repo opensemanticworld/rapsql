@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  testdb: # (!required to build stack)
+    container_name: age-container
+    image: apache/age:v1.1.0
+    ports:
+      - "${TESTDB_PORT}:5432"
+    environment:
+      - POSTGRES_USER=${TESTDB_USER}
+      - POSTGRES_PASSWORD=${TESTDB_PASSWORD}
+      - POSTGRES_DB=${TESTDB_DB}
+      - shared_preload_libraries=age # config age lib access
+    volumes:
+      - testdbdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - testbackend
+
+volumes:
+  testdbdata: {} 
+
+# avoid collision, stack runs on default
+networks:
+  testbackend:
+    name: test-db-networks
+    driver: bridge
