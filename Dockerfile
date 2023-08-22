@@ -1,5 +1,5 @@
 # 1 base image of database 
-FROM postgres:12 
+FROM postgres:12.14
 
 # 2 install postgres server, maven, git, and stack dependencies
 RUN apt-get update && apt-get install --assume-yes --no-install-recommends --no-install-suggests \
