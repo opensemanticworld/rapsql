@@ -36,3 +36,4 @@ $$) AS (n ag_catalog.agtype);
 GRANT ALL PRIVILEGES ON SCHEMA "api-test-data" TO web_anon;
 GRANT ALL PRIVILEGES ON "api-test-data"._ag_label_vertex TO web_anon;
 GRANT ALL PRIVILEGES ON "api-test-data"._ag_label_edge TO web_anon;
+
