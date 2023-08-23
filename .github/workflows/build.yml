@@ -20,7 +20,7 @@ jobs:
         run: docker compose -f docker-compose.testdb.yml up -d
 
       - name: Build RAPSQL Container Image
-        run: docker compose build rapsql:0.1.1
+        run: docker compose build
 
       - name: Destroy Test-DB Dependency
         run: docker compose -f docker-compose.testdb.yml down -v
