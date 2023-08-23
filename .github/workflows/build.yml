@@ -7,10 +7,18 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy Test-DB dependencies
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy Test-DB Dependency
         run: docker compose -f docker-compose.testdb.yml up -d
 
+      - name: Build RAPSQL Container Image
+        run: docker compose build rapsql:0.1.1
+
+      - name: Destroy Test-DB Dependency
+        run: docker compose -f docker-compose.testdb.yml down -v
+        
