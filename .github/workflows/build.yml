@@ -1,0 +1,15 @@
+name: Build RAPSQL Container Image
+
+on:
+  push:
+    branches:
+      - cicd
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Deploy Test-DB dependencies
+        run: docker compose -f docker-compose.test-db.yml up -d
+
