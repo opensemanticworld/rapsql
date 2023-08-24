@@ -33,7 +33,9 @@ jobs:
 
       - name: Deploy RAPSQL API Test Container
         run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up -d
-      
+        
+      - name: Destroy RAPSQL API Test Container
+        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml down
+        
       - name: Destroy RAPSQL Containers
         run: docker compose down -v
-      
