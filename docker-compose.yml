@@ -25,6 +25,8 @@ services:
     restart: unless-stopped
     depends_on:
       - pgrst
+    networks:
+      - rapsql-network
 
   pgrst: # database rest api
     container_name: pgrst-container
@@ -44,6 +46,8 @@ services:
     restart: unless-stopped
     depends_on:
       - rapsqldb
+    networks:
+      - rapsql-network
 
   rapsqldb: # enhanced postgresql database
     build:
@@ -57,10 +61,16 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-
     volumes:
       - rapsqldata:/var/lib/postgresql/data
     restart: unless-stopped
+    networks:
+      - rapsql-network
 
 volumes:
   rapsqldata: {}
+
+networks:
+  rapsql-network:
+    name: rapsql-network
+    driver: bridge

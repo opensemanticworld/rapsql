@@ -9,8 +9,7 @@ class APITest(unittest.TestCase):
 
     def setUp(self):
         """setUp method for controlling the test environment."""
-        self.base_url = "localhost:3000"
-        # self.base_url = "http://sysarch.digital.isc.fraunhofer.de:3000"
+        self.base_url = "http://localhost:3000"
         self.graph_name = "api-test"
         self.prep_data_gname = "api-test-data"
         self.print_test_info = False

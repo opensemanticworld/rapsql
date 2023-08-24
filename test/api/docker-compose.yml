@@ -9,9 +9,11 @@ services:
     image: rapsql/rapsql-api-test:latest
     container_name: rapsql-api-test-container
     networks:
-      - testapi
+      - rapsql-network
+    # command: ["python", "-m", "pytest", "api_test.py"]
 
 networks:
-  testapi:
-    name: test-api-networks
+  rapsql-network:
+    external: true
+    name: rapsql-network
     driver: bridge
