@@ -20,7 +20,7 @@ jobs:
         run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml up -d
 
       - name: Build RAPSQL Image
-        run: docker compose build --no-cache
+        run: docker compose build
 
       - name: Provide RAPSQL Service
         run: |
