@@ -7,7 +7,7 @@ on:
 
 jobs:
   api-testing-workflow:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Repository
@@ -21,7 +21,7 @@ jobs:
 
       - name: Provide RAPSQL Service
         run: |
-          docker compose up --build -d
+          docker compose up --build --no-cache -d
           sleep 20
 
       - name: Destroy RAPSQL Service
