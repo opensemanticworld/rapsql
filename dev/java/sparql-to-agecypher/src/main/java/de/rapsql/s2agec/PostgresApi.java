@@ -56,8 +56,8 @@ public class PostgresApi {
 
     // execute import statement 
     // default conn for endpoint / credentials for local debugging
-    // try ( Connection conn = DriverManager.getConnection("jdbc:default:connection") ) {  
-    try ( Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/rapsql", "andreas.raeder", "rapsqladm") ) {
+    try ( Connection conn = DriverManager.getConnection("jdbc:default:connection") ) {  
+    // try ( Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/rapsql", "postgres", "postgres") ) {
     Statement stmt = conn.createStatement(); 
       stmt.execute("SET search_path = ag_catalog, \"$user\", public;");     
       stmt.execute(rdf_to_cypher);         
@@ -133,7 +133,6 @@ public class PostgresApi {
 
     // default conn for endpoint / credentials for local debugging
     try (Connection conn = DriverManager.getConnection("jdbc:default:connection")) {
-    // try ( Connection conn = DriverManager.getConnection ("jdbc:postgresql://localhost:5432/rapsql", "andreas.raeder", "rapsqladm") ) {      
       Statement stmt = conn.createStatement(); 
       stmt.execute("SET search_path = ag_catalog, \"$user\", public;");           
       ResultSet rs = stmt.executeQuery(cypher_query);
