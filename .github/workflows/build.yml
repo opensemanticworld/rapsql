@@ -6,39 +6,46 @@ on:
       - cicd
 
 jobs:
+  prepare:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Set up environment
+      run: cp .env.example .env
+
+    - name: Provide Test-DB Dependency Container
+      run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml up -d
+
   build:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up environment
-        run: cp .env.example .env
-
-      - name: Run Test-DB Dependency Container
-        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml up -d
-
       - name: Build RAPSQL Container Image
         run: docker compose build
-
-      - name: Destroy Test-DB Dependency Conainer
-        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml down -v
-
-      - name: Deploy RAPSQL Containers
-        run: |
-          docker compose up -d
-          sleep 30
 
       - name: Build RAPSQL API Test Container Image
         run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml build --no-cache
 
-      - name: Deploy RAPSQL API Test Container
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Deploy RAPSQL Containers
         run: |
-          docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up
-        
-      - name: Destroy RAPSQL API Test Container
-        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml down
-        
+          docker compose up -d
+          sleep 30
+          - name: Destroy RAPSQL Containers
+            run: docker compose down -v
+
+  destroy:
+    runs-on: self-hosted
+
+    steps:
       - name: Destroy RAPSQL Containers
         run: docker compose down -v
+    
+      - name: Destroy Test-DB Dependency Conainer
+        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml down -v
