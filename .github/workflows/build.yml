@@ -30,12 +30,6 @@ jobs:
           docker compose up -d
           sleep 30
 
-      - name: Wait for RAPSQL API to be ready
-        run: curl http://localhost:3000 > curl_result_docker
-
-      - name: Check result
-        run: cat curl_result_docker
-
       - name: Build RAPSQL API Test Container Image
         run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml build --no-cache
 
