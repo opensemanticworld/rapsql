@@ -28,7 +28,8 @@ jobs:
       - name: Deploy RAPSQL Containers
         run: |
           docker compose up -d
-          dockerize -wait tcp://localhost:3000 -timeout 1m
+          sleep 20
+          timeout 300s bash -c 'until curl -sSf http://localhost:3000 >/dev/null; do sleep 5; done'
 
       - name: Build RAPSQL API Test Container Image
         run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml build --no-cache
