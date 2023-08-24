@@ -1,0 +1,10 @@
+version: "3"
+
+services: 
+ 
+  rapsql-api-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rapsql/rapsql-api-test:latest
+    container_name: rapsql-api-test-container

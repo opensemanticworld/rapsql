@@ -17,16 +17,23 @@ jobs:
         run: cp .env.example .env
 
       - name: Run Test-DB Dependency Container
-        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.testdb.yml up -d
+        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml up -d
 
       - name: Build RAPSQL Container Image
         run: docker compose build
 
       - name: Destroy Test-DB Dependency Conainer
-        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.testdb.yml down -v
+        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml down -v
 
       - name: Deploy RAPSQL Containers
         run: docker compose up -d
+
+      - name: Build RAPSQL API Test Container Image
+        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml build
+
+      - name: Deploy RAPSQL API Test Container
+        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up -d
       
       - name: Destroy RAPSQL Containers
         run: docker compose down -v
+      
