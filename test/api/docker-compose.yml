@@ -8,3 +8,10 @@ services:
       dockerfile: Dockerfile
     image: rapsql/rapsql-api-test:latest
     container_name: rapsql-api-test-container
+    networks:
+      - testapi
+
+networks:
+  testapi:
+    name: test-api-networks
+    driver: bridge
