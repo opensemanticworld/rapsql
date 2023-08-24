@@ -8,3 +8,5 @@ dev/test-queries/*
 /dev/java/sparql-to-agecypher/sparql-to-agecypher.code-workspace
 *notest*
 docs/info
+__pycache__
+backup.yml
