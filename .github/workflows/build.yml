@@ -17,10 +17,10 @@ jobs:
         run: cp .env.example .env
 
       - name: Deploy Test-DB Dependency
-        run: docker compose -f docker-compose.testdb.yml up -d
+        run: cddocker compose -f test/db/docker-compose.testdb.yml up -d
 
       - name: Build RAPSQL Container Image
         run: docker compose build
 
       - name: Destroy Test-DB Dependency
-        run: docker compose -f docker-compose.testdb.yml down -v
+        run: docker compose -f test/db/docker-compose.testdb.yml down -v
