@@ -9,7 +9,7 @@ class APITest(unittest.TestCase):
 
     def setUp(self):
         """setUp method for controlling the test environment."""
-        self.base_url = "http://pgrst-container"
+        self.base_url = "pgrst-container"
         # self.base_url = "http://sysarch.digital.isc.fraunhofer.de:3000"
         self.graph_name = "api-test"
         self.prep_data_gname = "api-test-data"
