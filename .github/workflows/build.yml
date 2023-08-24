@@ -6,8 +6,8 @@ on:
       - cicd
 
 jobs:
-  workflow:
-    runs-on: self-hosted
+  api-testing-workflow:
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout Repository
@@ -24,8 +24,8 @@ jobs:
           docker compose up --build -d
           sleep 20
 
-      - name: Destroy RAPSQL Containers
+      - name: Destroy RAPSQL Service
         run: docker compose down -v
 
-      - name: Destroy Test-DB Dependency Conainer
+      - name: Destroy Test-DB Service
         run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml down -v
