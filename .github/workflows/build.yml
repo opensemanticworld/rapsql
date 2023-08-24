@@ -1,4 +1,4 @@
-name: Build RAPSQL Container Image
+name: Test RAPSQL API
 
 on:
   push:
@@ -6,39 +6,26 @@ on:
       - cicd
 
 jobs:
-  build:
+  workflow:
     runs-on: self-hosted
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up environment
+      - name: Set up Environment
         run: cp .env.example .env
 
-      - name: Run Test-DB Dependency Container
+      - name: Provide Test-DB Service
         run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml up -d
 
-      - name: Build RAPSQL Container Image
-        run: docker compose build
+      - name: Provide RAPSQL Service
+        run: |
+          docker compose up --build -d
+          sleep 20
+
+      - name: Destroy RAPSQL Containers
+        run: docker compose down -v
 
       - name: Destroy Test-DB Dependency Conainer
         run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml down -v
-
-      - name: Deploy RAPSQL Containers
-        run: |
-          docker compose up -d
-          sleep 30
-
-      - name: Build RAPSQL API Test Container Image
-        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml build --no-cache
-
-      - name: Deploy RAPSQL API Test Container
-        run: |
-          docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up
-        
-      - name: Destroy RAPSQL API Test Container
-        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml down
-        
-      - name: Destroy RAPSQL Containers
-        run: docker compose down -v
