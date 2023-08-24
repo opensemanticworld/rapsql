@@ -17,7 +17,7 @@ jobs:
         run: cp .env.example .env
 
       - name: Deploy Test-DB Dependency
-        run: cddocker compose -f test/db/docker-compose.testdb.yml up -d
+        run: cddocker compose -f ${{ github.workspace }}/test/db/docker-compose.testdb.yml" up -d
 
       - name: Build RAPSQL Container Image
         run: docker compose build
