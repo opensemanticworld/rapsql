@@ -29,7 +29,9 @@ jobs:
         run: |
           docker compose up -d
           sleep 20
-          timeout 20s bash -c 'until curl -sSf pgrst-container >/dev/null; do sleep 5; done'
+
+      - name: Wait for RAPSQL API to be ready
+        run: timeout 20s bash -c 'until curl -sSf pgrst-container:3000 >/dev/null; do sleep 5; done'
 
       - name: Build RAPSQL API Test Container Image
         run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml build --no-cache
