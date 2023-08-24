@@ -56,7 +56,8 @@ import org.apache.jena.riot.RDFDataMgr;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TranspilerTest {
   // extern postgres age service auth (default) !test database dependency
-  private static final String DB_URL = "jdbc:postgresql://sysarch.digital.isc.fraunhofer.de:5444/postgres";
+  // private static final String DB_URL = "jdbc:postgresql://sysarch.digital.isc.fraunhofer.de:5444/postgres";
+  private static final String DB_URL = "jdbc:postgresql://localhost:5444/postgres";
   private static final String USER = "postgres";
   private static final String PASS = "postgres";
   // test parameter
