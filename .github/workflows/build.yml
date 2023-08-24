@@ -29,11 +29,11 @@ jobs:
         run: docker compose up -d
 
       - name: Build RAPSQL API Test Container Image
-        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml build
+        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml build --no-cache
 
       - name: Deploy RAPSQL API Test Container
         run: |
-          docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up -d
+          docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up -d 
       
       - name: Check container status and show logs
         run: |
