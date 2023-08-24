@@ -33,7 +33,7 @@ jobs:
 
       - name: Deploy RAPSQL API Test Container
         run: |
-          docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up -d 
+          docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up
       
       - name: Check container status and show logs
         run: |
