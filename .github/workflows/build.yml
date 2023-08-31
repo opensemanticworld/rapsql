@@ -37,10 +37,11 @@ jobs:
           -Dtest=ApiTest -Dapi.url=http://pgrst-container:3000"
 
       - name: API Test external Container
-        run: |
-          docker build -t api-test:0.0.1 . 
-          docker run -it --network rapsql-net --rm api-test:0.0.1
-          
+        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up --build
+
+      - name: Destroy RAPSQL API Test Container
+        run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml down
+      
       - name: Destroy RAPSQL Service
         run: docker compose down -v
 
