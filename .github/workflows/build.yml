@@ -30,12 +30,17 @@ jobs:
           "cd tmp/s2agec && mvn test \
           -Dtest=TranspilerTest"
 
-      - name: API Test
+      - name: API Test internal
         run: |
           docker exec rapsqldb-container sh -c \
           "cd tmp/s2agec && mvn test \
           -Dtest=ApiTest -Dapi.url=http://pgrst-container:3000"
-      
+
+      - name: API Test external Container
+        run: |
+          docker build -t api-test:0.0.1 . 
+          docker run -it --network rapsql-net --rm api-test:0.0.1
+          
       - name: Destroy RAPSQL Service
         run: docker compose down -v
 

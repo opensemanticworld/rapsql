@@ -8,12 +8,13 @@ services:
       dockerfile: Dockerfile
     image: rapsql/rapsql-api-test:latest
     container_name: rapsql-api-test-container
+    # environment:
+    #   API_BASE_URL: http://pgrst-container:3000
     networks:
-      - rapsql-network
+      - rapsql-net
     # command: ["python", "-m", "pytest", "api_test.py"]
 
 networks:
-  rapsql-network:
-    # external: true
-    name: rapsql-network
+  rapsql-net:
+    external: true
     driver: bridge

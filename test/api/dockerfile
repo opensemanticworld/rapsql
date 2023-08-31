@@ -10,5 +10,7 @@ WORKDIR /app
 # 4 Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
+ENV API_BASE_URL=http://pgrst-container:3000
+
 # Run test_api.py when the container launches
 CMD ["python", "-m", "pytest", "api_test.py"]
