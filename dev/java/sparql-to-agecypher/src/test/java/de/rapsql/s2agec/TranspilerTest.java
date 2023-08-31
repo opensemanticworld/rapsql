@@ -25,7 +25,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -54,29 +53,20 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 
-
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.utility.DockerImageName;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-
-@Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TranspilerTest {
-
+  // extern postgres age service auth (default) !test database dependency
+  // private static final String DB_URL = "jdbc:postgresql://sysarch.digital.isc.fraunhofer.de:5444/postgres";
+  private static final String DB_URL = "jdbc:postgresql://localhost:5432/rapsql";
+  // private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5444/postgres";
+  // private static final String DB_URL = "jdbc:postgresql://testdb:5444/postgres";
+  private static final String USER = "postgres";
+  private static final String PASS = "postgres";
+  // test parameter
   private static final String GRAPH_NAME = "junit-test";
   private static final String PATH_NAME = "src/test/resources/ttl-sparql";
 
-  @Container
-  public PostgreSQLContainer<?> db = new PostgreSQLContainer<>(
-    DockerImageName.parse("apache/age:v1.1.0")
-    .asCompatibleSubstituteFor("postgres")
-  )
-    .withDatabaseName("postgres")
-    .withUsername("postgres")
-    .withPassword("postgres");
-
-  // // provide test resources of rdf model, rdf-cypher model, sparql queries
+  // provide test resources of rdf model, rdf-cypher model, sparql queries
   private static List<Arguments> MethodProvider() throws IOException {
     // provide all folder structured ttl and sparql files
     File f = new File(PATH_NAME);
@@ -112,15 +102,10 @@ public class TranspilerTest {
     return method_args;
   }
 
-
-
   @BeforeEach // create test graph in postgres
   public void age_create_graph() throws SQLException {
     System.out.println(StringUtils.repeat("%", 70));
-    try ( Connection conn = DriverManager.getConnection(
-        db.getJdbcUrl(), db.getUsername(), db.getPassword()
-      ) 
-    ) {
+    try ( Connection conn = DriverManager.getConnection(DB_URL, USER, PASS) ) {
       Statement stmt = conn.createStatement(); 
       stmt.execute("LOAD 'age';");
       stmt.execute("SET search_path = ag_catalog, \"$user\", public;");
@@ -131,10 +116,8 @@ public class TranspilerTest {
 
   @AfterEach // drop test graph in postgres
   public void age_drop_graph() throws SQLException {
-    try ( Connection conn = DriverManager.getConnection(
-        db.getJdbcUrl(), db.getUsername(), db.getPassword()
-      ) 
-    ) {      Statement stmt = conn.createStatement(); 
+    try ( Connection conn = DriverManager.getConnection(DB_URL, USER, PASS) ) {
+      Statement stmt = conn.createStatement(); 
       stmt.execute("LOAD 'age'");
       stmt.execute("SET search_path = ag_catalog, \"$user\", public;");
       stmt.execute("SELECT * FROM drop_graph('" + GRAPH_NAME  + "', true);");
@@ -146,10 +129,7 @@ public class TranspilerTest {
   @MethodSource("MethodProvider")
   public void run_test(Model rdf_model, String rdf_to_cypher, File query_file) throws IOException {
     // import custom rdf model to age
-    try ( Connection conn = DriverManager.getConnection(
-        db.getJdbcUrl(), db.getUsername(), db.getPassword()
-      ) 
-    ) {      
+    try ( Connection conn = DriverManager.getConnection(DB_URL, USER, PASS) ) {
       Statement stmt = conn.createStatement(); 
       stmt.execute("LOAD 'age';");
       stmt.execute("SET search_path = ag_catalog, \"$user\", public;");
@@ -199,10 +179,7 @@ public class TranspilerTest {
     }
 
     // connect to postgres to perform test on transformed cypher query
-    try ( Connection conn = DriverManager.getConnection(
-        db.getJdbcUrl(), db.getUsername(), db.getPassword()
-      ) 
-    ) {      
+    try ( Connection conn = DriverManager.getConnection(DB_URL, USER, PASS) ) {
       Statement stmt = conn.createStatement(); 
       stmt.execute("LOAD 'age'");
       stmt.execute("SET search_path = ag_catalog, \"$user\", public;");             
