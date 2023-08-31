@@ -6,8 +6,8 @@ on:
       - cicd
 
 jobs:
-  api-testing-workflow:
-    runs-on: self-hosted
+  rapsql-test:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
@@ -30,16 +30,16 @@ jobs:
           "cd tmp/s2agec && mvn test \
           -Dtest=TranspilerTest"
 
-      - name: API Test internal
+      - name: API Test (internal)
         run: |
           docker exec rapsqldb-container sh -c \
           "cd tmp/s2agec && mvn test \
           -Dtest=ApiTest -Dapi.url=http://pgrst-container:3000"
 
-      - name: API Test external Container
+      - name: API Test Container Build & Run (external)
         run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml up --build
 
-      - name: Destroy RAPSQL API Test Container
+      - name: API Test Container Destroy (external)
         run: docker compose -f ${{ github.workspace }}/test/api/docker-compose.yml down
       
       - name: Destroy RAPSQL Service
