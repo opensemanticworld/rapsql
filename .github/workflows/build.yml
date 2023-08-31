@@ -7,7 +7,7 @@ on:
 
 jobs:
   api-testing-workflow:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Repository
@@ -25,8 +25,8 @@ jobs:
           sleep 20
 
       - name: Perform Integration Test
-        run: docker exec -it rapsqldb-container \
-          sh -c "cd tmp/s2agec && mvn test"
+        run: |
+          docker exec rapsqldb-container sh -c "cd tmp/s2agec && mvn test"
 
       - name: Destroy RAPSQL Service
         run: docker compose down -v
