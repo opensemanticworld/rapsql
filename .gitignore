@@ -10,3 +10,4 @@ dev/test-queries/*
 docs/info
 __pycache__
 backup.yml
+.vscode
