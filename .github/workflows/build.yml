@@ -7,7 +7,7 @@ on:
 
 jobs:
   api-testing-workflow:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
@@ -16,11 +16,8 @@ jobs:
       - name: Set up Environment
         run: cp .env.example .env
 
-      - name: Provide Test-DB Service
-        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml up -d
-
       - name: Build RAPSQL Image
-        run: docker compose build --no-cache
+        run: docker compose build 
 
       - name: Provide RAPSQL Service
         run: |
@@ -30,5 +27,4 @@ jobs:
       - name: Destroy RAPSQL Service
         run: docker compose down -v
 
-      - name: Destroy Test-DB Service
-        run: docker compose -f ${{ github.workspace }}/test/db/docker-compose.yml down -v
+
