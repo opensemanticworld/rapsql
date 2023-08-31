@@ -24,6 +24,10 @@ jobs:
           docker compose up -d
           sleep 20
 
+      - name: Perform Integration Test
+        run: docker exec -it rapsqldb-container \
+          sh -c "cd tmp/s2agec && mvn test"
+
       - name: Destroy RAPSQL Service
         run: docker compose down -v
 
