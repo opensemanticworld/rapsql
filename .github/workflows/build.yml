@@ -24,10 +24,14 @@ jobs:
           docker compose up -d
           sleep 20
 
-      - name: Perform Integration Test
+      - name: Transpiler Integration Test
         run: |
-          docker exec rapsqldb-container sh -c "cd tmp/s2agec && mvn test"
+          docker exec rapsqldb-container sh -c "cd tmp/s2agec && mvn test -Dtest=TranspilerTest"
 
+      # - name: API Test
+      #   run: |
+      #     docker exec rapsqldb-container sh -c "cd tmp/s2agec && mvn test -Dtest=ApiTest"
+      
       - name: Destroy RAPSQL Service
         run: docker compose down -v
 

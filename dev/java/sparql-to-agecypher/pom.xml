@@ -71,6 +71,18 @@
       <version>5.9.2</version>
       <scope>test</scope>
     </dependency> 
+    <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>5.3.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.16.0</version>
+    </dependency>
     <!-- logger binding -->
     <dependency>
       <groupId>org.slf4j</groupId>

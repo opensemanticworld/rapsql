@@ -58,8 +58,6 @@ public class TranspilerTest {
   // extern postgres age service auth (default) !test database dependency
   // private static final String DB_URL = "jdbc:postgresql://sysarch.digital.isc.fraunhofer.de:5444/postgres";
   private static final String DB_URL = "jdbc:postgresql://localhost:5432/rapsql";
-  // private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5444/postgres";
-  // private static final String DB_URL = "jdbc:postgresql://testdb:5444/postgres";
   private static final String USER = "postgres";
   private static final String PASS = "postgres";
   // test parameter
