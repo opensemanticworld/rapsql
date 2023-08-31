@@ -26,11 +26,11 @@ RUN git clone -b PG12 https://github.com/apache/age.git age && \
 # 6 provide transpiler source code
 COPY dev/java/sparql-to-agecypher /tmp/s2agec
 
-# 7 transpiler integration test and packaging (!testdb dependency)
-RUN cd /tmp/s2agec && mvn clean package 
+# 7 transpiler integration test and packaging 
+RUN cd /tmp/s2agec && mvn clean package -Dmaven.test.skip
 
 # 8 provide init scripts for enhanced db setup on entrypoint
 COPY docker-entrypoint/* /docker-entrypoint-initdb.d/
 
 # db config for age library access
-CMD ["postgres", "-c", "shared_preload_libraries=age"]
+# CMD ["postgres", "-c", "shared_preload_libraries=age"]
