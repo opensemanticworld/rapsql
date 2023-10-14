@@ -51,7 +51,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: rapsql/pg-age-pljava:v0.1.0
+    image: opensemanticworld/rapsql:v0.1.0
+    # image: rapsql/pg-age-pljava:v0.1.0 # opensemanticworld/rapsql:v0.1.0
     container_name: rapsqldb-container
     ports:
       - "${POSTGRES_PORT}:5432"
@@ -62,6 +63,7 @@ services:
       - shared_preload_libraries=age
     volumes:
       - rapsqldata:/var/lib/postgresql/data
+      - ./mnt:/mnt
     restart: unless-stopped      
     networks:
       - rapsql-net

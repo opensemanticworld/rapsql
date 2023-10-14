@@ -12,3 +12,7 @@ __pycache__
 backup.yml
 .vscode
 data/*
+analysis/*
+/dev/bash/*
+/mnt/*
+dev/java/sparql-to-agecypher/src/test/resources/sp2b/*

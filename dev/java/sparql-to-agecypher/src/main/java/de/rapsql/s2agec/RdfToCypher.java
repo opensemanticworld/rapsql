@@ -43,8 +43,8 @@ public class RdfToCypher {
         visitor.set_label("o:Object");
         cypher_q = cypher_q.concat((String) stmt.getObject().visitWith(visitor));
         cypher_q = cypher_q.concat(
-          String.format(" MERGE (s)-[:Predicate {uri: '%s', stringrep: '%s'}]->(o) $$) AS (n ag_catalog.agtype); ", 
-          stmt.getPredicate().getURI(), stmt.getPredicate().getURI()));
+          String.format(" MERGE (s)-[:Predicate {uri: '%s', stringrep: '%s', value: '%s'}]->(o) $$) AS (n ag_catalog.agtype); ", 
+          stmt.getPredicate().getURI(), stmt.getPredicate().getURI(), stmt.getPredicate().getURI()));
         cypher_qs = cypher_qs.concat(cypher_q);
     }
     return cypher_qs;

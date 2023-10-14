@@ -19,7 +19,7 @@ package de.rapsql.s2agec;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
+// import org.apache.jena.base.Sys;
 import org.apache.jena.graph.BlankNodeId;
 import org.apache.jena.graph.Graph;
 import org.apache.jena.graph.NodeVisitor;
@@ -32,6 +32,7 @@ import org.apache.jena.graph.Node_URI;
 import org.apache.jena.graph.Node_Variable;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.graph.impl.LiteralLabel;
+// import org.apache.jena.sparql.algebra.Op;
 import org.apache.jena.sparql.algebra.OpVisitor;
 import org.apache.jena.sparql.algebra.op.OpAssign;
 import org.apache.jena.sparql.algebra.op.OpBGP;
@@ -70,7 +71,7 @@ import org.apache.jena.sparql.algebra.op.OpUnion;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.expr.Expr;
 
-public class SparqlAlgebraVisit implements OpVisitor {
+public class SparqlAlgebraVisit2 implements OpVisitor {
   // mapping variables
   private String cypher;
   private Map<Var, String> Sparql_to_cypher_variable_map;
@@ -81,7 +82,7 @@ public class SparqlAlgebraVisit implements OpVisitor {
   private String conversionErrors = "";
   
   // initialize instance
-  public SparqlAlgebraVisit() {
+  public SparqlAlgebraVisit2() {
     cypher = new String();
     Sparql_blank_node_to_var_map = new HashMap<Node_Blank, Var>();
     Sparql_to_cypher_variable_map = new HashMap<Var, String>();
@@ -108,27 +109,58 @@ public class SparqlAlgebraVisit implements OpVisitor {
     }
   }
 
+
   @Override // MATCH
   public void visit(OpBGP opBGP) {
     // TODO: Instead of handling opTriple in this function, handle it in its visitor
 
     //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
-    // System.out.println("\nIn opBGP\n" + opBGP.toString()+"\n");
+    System.out.println("\nIn opBGP\n" + opBGP.toString()+"\n");
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    java.util.Iterator<Triple> it = opBGP.getPattern().iterator();
+    //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ 
+    // opBGP.getPattern().iterator().forEachRemaining(
+    //   tpl -> { 
+    //     // System.out.println("Triple: " + tpl.toString());
+    //     System.out.println("Subject: " + tpl.getMatchSubject().getName());
+    //     System.out.println("Predicate: " + tpl.getMatchPredicate());
+    //     System.out.println("Object: " + tpl.getMatchObject());
+    //     System.out.println("Subject: " + tpl.getMatchSubject().getClass());
+    //     System.out.println("Predicate: " + tpl.getMatchPredicate().getClass());
+    //     System.out.println("Object: " + tpl.getMatchObject().getClass());
+    //     System.out.println("\n");
+    //     // cypher = cypher + "(" 
+    //     //   + t.getMatchSubject().visitWith(cypherNodeMatcher) 
+    //     //   + ")-[" 
+    //     //   + t.getMatchPredicate().visitWith(cypherNodeMatcher) 
+    //     //   + "]->("
+    //     //   + t.getMatchObject().visitWith(cypherNodeMatcher)
+    //     //   + "),";
+    //   }
+    // );
     cypher = cypher + "MATCH ";
-    while(it.hasNext()) {
-      Triple t = it.next();
-      // CreateCypher visitor = new CreateCypher();
+
+    opBGP.getPattern().iterator().forEachRemaining(tpl -> { 
+      // System.out.println("Triple: " + tpl.toString());
+      System.out.println("Subject: " + tpl.getMatchSubject().getName());
+      System.out.println("Predicate: " + tpl.getMatchPredicate());
+      System.out.println("Object: " + tpl.getMatchObject());
+      System.out.println("Subject: " + tpl.getMatchSubject().getClass());
+      System.out.println("Predicate: " + tpl.getMatchPredicate().getClass());
+      System.out.println("Object: " + tpl.getMatchObject().getClass());
+      System.out.println("\n");
+
       NodeVisitor cypherNodeMatcher = new NodeVisitor() {
         @Override
         public String visitBlank(Node_Blank it, BlankNodeId id) {
+          System.out.println("visitBlank: " + "\nNode_Blank: " + it + "\nBlankNodeId: " + id);
           return create_or_get_variable(it);
         }
 
         @Override
         public String visitLiteral(Node_Literal it, LiteralLabel lit) {
+          System.out.println("visitLiteral: " + "\nNode_Literal: " + it + "\nLiteralLabel: " + lit);
           return 
             (lit.language().equals("")) ?
               (String.format("{uri:\'\', typeiri:\'%s\', lexform:\'%s\'}",
@@ -140,11 +172,13 @@ public class SparqlAlgebraVisit implements OpVisitor {
 
         @Override
         public String visitURI(Node_URI it, String uri) {
+          System.out.println("visitURI: " + "\nNode_URI: " + it + "\nURI: " + uri);
           return String.format("{uri:\'%s\'}", uri);
         }
 
         @Override
         public String visitVariable(Node_Variable it, String name) {
+          System.out.println("visitVariable: " + "\nNode_Variable: " + it + "\nVarName: " + name);
           return create_or_get_variable(Var.alloc(it));
         }
 
@@ -163,34 +197,85 @@ public class SparqlAlgebraVisit implements OpVisitor {
           return null;
         } 
       };
-      
+
       cypher = cypher + "(" 
-          + t.getMatchSubject().visitWith(cypherNodeMatcher) 
-          + ")-[" 
-          + t.getMatchPredicate().visitWith(cypherNodeMatcher) 
-          + "]->("
-          + t.getMatchObject().visitWith(cypherNodeMatcher)
-          + "),";
+        + tpl.getMatchSubject().visitWith(cypherNodeMatcher) 
+        + ")-[" 
+        + tpl.getMatchPredicate().visitWith(cypherNodeMatcher) 
+        + "]->("
+        + tpl.getMatchObject().visitWith(cypherNodeMatcher)
+        + "),";
+    });
 
-    }
+
+    // java.util.Iterator<Triple> it = opBGP.getPattern().iterator();
+    // while(it.hasNext()) {
+    //   Triple t = it.next();
+    //   // CreateCypher visitor = new CreateCypher();
+    //   NodeVisitor cypherNodeMatcher = new NodeVisitor() {
+    //     @Override
+    //     public String visitBlank(Node_Blank it, BlankNodeId id) {
+    //       System.out.println("visitBlank: " + "\nNode_Blank: " + it + "\nBlankNodeId: " + id);
+    //       return create_or_get_variable(it);
+    //     }
+
+    //     @Override
+    //     public String visitLiteral(Node_Literal it, LiteralLabel lit) {
+    //       System.out.println("visitLiteral: " + "\nNode_Literal: " + it + "\nLiteralLabel: " + lit);
+    //       return 
+    //         (lit.language().equals("")) ?
+    //           (String.format("{uri:\'\', typeiri:\'%s\', lexform:\'%s\'}",
+    //               lit.getDatatypeURI(), lit.getLexicalForm()))
+    //         : 
+    //           (String.format("{uri:\'\', typeiri:\'%s\', lexform:\'%s\', langtag:\'%s\'}",
+    //               lit.getDatatypeURI(), lit.getLexicalForm(), lit.language()));
+    //     }
+
+    //     @Override
+    //     public String visitURI(Node_URI it, String uri) {
+    //       System.out.println("visitURI: " + "\nNode_URI: " + it + "\nURI: " + uri);
+    //       return String.format("{uri:\'%s\'}", uri);
+    //     }
+
+    //     @Override
+    //     public String visitVariable(Node_Variable it, String name) {
+    //       System.out.println("visitVariable: " + "\nNode_Variable: " + it + "\nVarName: " + name);
+    //       return create_or_get_variable(Var.alloc(it));
+    //     }
+
+    //     @Override
+    //     public Object visitTriple(Node_Triple it, Triple triple) {
+    //       return null;
+    //     }
+
+    //     @Override
+    //     public Object visitGraph(Node_Graph it, Graph graph) { 
+    //       return null;
+    //     }
+        
+    //     @Override
+    //     public String visitAny(Node_ANY it) {
+    //       return null;
+    //     } 
+    //   };
+      
+
+    // }
     cypher = cypher.substring(0, cypher.length() - 1);
-    // cypher = cypher.concat(" ");
-
-    // System.out.println("opBGP PATTERN OUTER\n" + opBGP.getPattern().toString());
-
+    cypher = cypher.concat(" ");
   }
 
   @Override // WHERE 
   public void visit(OpFilter opFilter) {
 
     //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
-    // System.out.println("\nIn opFilter\n" + opFilter.toString());
-    // System.out.println("\nIn opFilter.getSubOp()\n" + opFilter.getSubOp());
+    System.out.println("\nIn opFilter\n" + opFilter.toString());
+    System.out.println("\nIn opFilter.getSubOp()\n" + opFilter.getSubOp());
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     opFilter.getSubOp().visit(this);  // pass on suboperations
 
-    cypher = cypher.concat(" WHERE "); // start WHERE statement
+    cypher = cypher.concat("WHERE "); // start WHERE statement
 
     // build WHERE clause depending on filter input expressions
     java.util.Iterator<Expr> it = opFilter.getExprs().iterator();
@@ -205,10 +290,8 @@ public class SparqlAlgebraVisit implements OpVisitor {
 
         String arg1 = Sparql_to_cypher_variable_map.get(exprVar).toString();
         String arg2 = expr.getFunction().getArg(2).toString(); 
-        // System.out.println("ARG EXRESSIONS" + (expr.getFunction().getArg(2)));
         if (operator != "regex") { // build clause by basic expr
-          // System.out.println("\nOPERATOR!!!!!!!!!!!\n" + operator);
-          cypher = cypher.concat(arg1 + ".value " + operator + " " + arg2.replace("\"", "'").replaceAll("^<(.*)>$", "'$1'"));
+          cypher = cypher.concat(arg1 + ".value " + operator + " " + arg2.replace("\"", "'"));
         } else { // build clause by regex 
           cypher = cypher.concat("toString(" + arg1 + ".value) " + operator.replace("regex", "=~") + " ");
           if (expr.getFunction().numArgs() == 3) { // check 3rd argument
@@ -230,197 +313,30 @@ public class SparqlAlgebraVisit implements OpVisitor {
   @Override // RETURN
   public void visit(OpProject opProject) {
     //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
-    // System.out.println("\nIn opProject\n" + opProject.toString());
+    System.out.println("\nIn opProject\n" + opProject.toString());
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // provide sub statements to other visitors
     opProject.getSubOp().visit(this);
 
-    // check if ORDER BY is present
-    if (opProject.getSubOp() instanceof OpOrder) {
-      // System.out.println("ORDER BY detected");
-      // TODO: FILTER not yet implemented in Order By
-      cypher = cypher.concat(" RETURN ");
-      for(Var var: opProject.getVars()) {
-        cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + ", ");
-      }
-      cypher = cypher.substring(0, cypher.length() - 2);
-      cypher = cypher.concat(" $$) AS (");
-      for(Var var: opProject.getVars()) {
-        cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + " ag_catalog.agtype, ");
-      }
-      cypher = cypher.substring(0, cypher.length() - 2);
-      cypher = cypher.concat(")");
-    } else {
-      // System.out.println("!NO ORDER BY detected");
-      // transform sparql FILTER into cypher RETURN clause
-      cypher = cypher.concat(" RETURN ");
-      for(Var var: opProject.getVars()) {
-        // System.out.println("PROJECT\n"+ var);
-        cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + ".stringrep, ");
-        // TODO: check type conversion
-        // cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + ".value, ");
-      }
-      cypher = cypher.substring(0, cypher.length() - 2);
-      cypher = cypher.concat(" $$) AS (");
-      for(Var var: opProject.getVars()) {
-        cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + " ag_catalog.agtype, ");
-      }
-      cypher = cypher.substring(0, cypher.length() - 2);
-      cypher = cypher.concat(")");
+    // transform sparql FILTER into cypher RETURN clause
+    cypher = cypher.concat(" RETURN ");
+    for(Var var: opProject.getVars()) {
+      // System.out.println("PROJECT\n"+ var);
+      cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + ".stringrep, ");
+      // TODO: check type conversion
+      // cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + ".value, ");
     }
-
+    cypher = cypher.substring(0, cypher.length() - 2);
+    cypher = cypher.concat(" $$) AS (");
+    for(Var var: opProject.getVars()) {
+      cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + " ag_catalog.agtype, ");
+    }
+    cypher = cypher.substring(0, cypher.length() - 2);
+    cypher = cypher.concat(")");
     // TODO: create test cases for cypher-based term endings
     // cypher = cypher.concat(");"); 
   }
-
-  @Override // ORDER BY
-  public void visit(OpOrder opOrder) {
-    //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
-    // System.out.println(StringUtils.repeat("%", 70));
-    // System.out.println("Algebra type OpOrder in development");
-    // System.out.println(StringUtils.repeat("%", 70));
-    // System.out.println("\nIn opOrder BEFORE\n" + opOrder.toString());
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    opOrder.getSubOp().visit(this);
-    cypher = cypher.concat(" WITH ");
-    for(Var var: Sparql_to_cypher_variable_map.keySet()) {
-      cypher = cypher.concat(
-        Sparql_to_cypher_variable_map.get(var) 
-        + ".stringrep AS "
-        + Sparql_to_cypher_variable_map.get(var) 
-        + ", "
-      );
-    }
-    cypher = cypher.substring(0, cypher.length() - 2);
-    cypher = cypher.concat(" ORDER BY ");
-    for(Var var: opOrder.getConditions().get(0).getExpression().getVarsMentioned()) {
-      cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + ".stringrep, ");
-    }
-    cypher = cypher.substring(0, cypher.length() - 2);
-  }
-
-  @Override // OPTIONAL
-  public void visit(OpLeftJoin opLeftJoin) {
-    //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
-    // System.out.println(StringUtils.repeat("%", 70));
-    // System.out.println("Algebra type OpLeftJoin in development");
-    // System.out.println(StringUtils.repeat("%", 70));
-
-    opLeftJoin.getLeft().visit(this);
-    opLeftJoin.getRight().visit(this);
-
-  }
-
-  @Override // ?
-  public void visit(OpDistinct opDistinct) {
-    //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
-    System.out.println(StringUtils.repeat("%", 70));
-    System.out.println("Algebra type OpDistinct in development");
-    System.out.println(StringUtils.repeat("%", 70));
-    System.out.println("\nIn opDistinct\n" + opDistinct.toString());
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    opDistinct.getSubOp().visit(this);
-
-    // CONCATS AT THE VERY END OF THE CYPHER QUERY
-    // cypher = cypher.concat("SELECT DISTINCT"); 
-
-    // OPTION 1
-    // REPLACE `SELECT *` AT THE VERY BEGINNING OF THE CYPHER QUERY
-    // REQUIRES SELECT STATEMENT IN VISITOR
-    // cypher = cypher.replace("SELECT *", "SELECT DISTINCT");
-
-    // OPTION 2
-    // CHECK WITH Distinct aggregation alongside with a replacement of the RETURN clause
-    cypher = cypher.replace("RETURN", "RETURN DISTINCT");
-
-
-    // this.isQueryConversionSuccesful = false;
-    // this.conversionErrors += "Unsupported Algebra type OpDistinct\n";
-  }
-
-
-
-
-
-  // @Override // ORDER BY DOCUMENTATION
-  // public void visit(OpOrder opOrder) {
-  //   //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
-  //   // System.out.println(StringUtils.repeat("%", 70));
-  //   // System.out.println("Algebra type OpOrder in development");
-  //   // System.out.println(StringUtils.repeat("%", 70));
-
-  //   // 1-OpOrder-init
-  //   // System.out.println("\nIn opOrder BEFORE\n" + opOrder.toString());
-  //   // System.out.println("\nCYPHER\n" + cypher);
-  //   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-  //   // 2-OpOrder-visit
-  //   opOrder.getSubOp().visit(this);
-  //   System.out.println("\nIn opOrder\n" + opOrder.toString());
-  //   // System.out.println("VAR MAP" + Sparql_to_cypher_variable_map.values());
-  //   // System.out.println("\nCYPHER\n" + cypher);
-
-  //   // 5-OpOrder-visit-2-cypher
-  //   cypher = cypher.concat(" WITH ");
-  //   for(Var var: Sparql_to_cypher_variable_map.keySet()) {
-  //     cypher = cypher.concat(
-  //       Sparql_to_cypher_variable_map.get(var) 
-  //       + ".stringrep AS "
-  //       + Sparql_to_cypher_variable_map.get(var) 
-  //       + ", "
-  //     );
-  //   }
-  //   cypher = cypher.substring(0, cypher.length() - 2);
-  //   cypher = cypher.concat(" ORDER BY ");
-  //   for(Var var: opOrder.getConditions().get(0).getExpression().getVarsMentioned()) {
-  //     cypher = cypher.concat(Sparql_to_cypher_variable_map.get(var) + ".stringrep, ");
-  //   }
-  //   cypher = cypher.substring(0, cypher.length() - 2);
-    
-  //   // AGE EXAMPLE -> WITH MUST BE APPLIED TO ALL VARS, ORDER BY NEED TO BE AFTER WITH 
-  //   // SELECT *
-  //   // FROM cypher('graph_name', $$
-  //   //     MATCH (n)
-  //   //     WITH n.name as name, n.age as age
-  //   //     ORDER BY n.name
-  //   //     RETURN name, age
-  //   // $$) as (name agtype, age agtype);
-
-  //   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  //   // this.isQueryConversionSuccesful = false;
-  //   // this.conversionErrors += "Unsupported Algebra type OpOrder\n";
-  // }
-
-
-  // @Override // OPTIONAL
-  // public void visit(OpLeftJoin opLeftJoin) {
-  //   //! ONLY FOR DEBUG VISITOR ! COMMENT OUT FOR STACK INTEGRATION !
-  //   // System.out.println(StringUtils.repeat("%", 70));
-  //   // System.out.println("Algebra type OpLeftJoin in development");
-  //   // System.out.println(StringUtils.repeat("%", 70));
-    
-  //   // 3-OpOrder-visit-1-OpLeftJoin-init
-  //   // System.out.println("\nIn opLeftJoin INIT\n" + opLeftJoin.toString());
-
-  //   // 4-OpOrder-visit-2-OpLeftJoin-visitLeft
-  //   opLeftJoin.getLeft().visit(this);
-  //   // System.out.println("\nIn opLeftJoin VISIT_LEFT\n" + opLeftJoin.toString());
-    
-    
-  //   // 5-OpOrder-visit-2-OpLeftJoin-visitLeft-visitRight
-  //   opLeftJoin.getRight().visit(this);
-  //   // System.out.println("\nIn opLeftJoin VISIT_RIGHT\n" + opLeftJoin.toString());
-
-  //   // this.isQueryConversionSuccesful = false;
-  //   // this.conversionErrors += "Unsupported Algebra type OpLeftJoin\n";
-  // }
-
-
-
-
-
-
-
-
 
   //////////////////////// FUTURE WORK BELOW ////////////////////////
   // TODO: 1. integrate rdf2pg instead of custom graph schema
@@ -525,6 +441,12 @@ public class SparqlAlgebraVisit implements OpVisitor {
   }
 
   @Override
+  public void visit(OpLeftJoin opLeftJoin) {
+    this.isQueryConversionSuccesful = false;
+    this.conversionErrors += "Unsupported Algebra type OpLeftJoin\n";
+  }
+
+  @Override
   public void visit(OpUnion opUnion) {
     this.isQueryConversionSuccesful = false;
     this.conversionErrors += "Unsupported Algebra type OpUnion\n";
@@ -567,11 +489,22 @@ public class SparqlAlgebraVisit implements OpVisitor {
   }
 
   @Override
+  public void visit(OpOrder opOrder) {
+    this.isQueryConversionSuccesful = false;
+    this.conversionErrors += "Unsupported Algebra type OpOrder\n";
+  }
+
+  @Override
   public void visit(OpReduced opReduced) {
     this.isQueryConversionSuccesful = false;
     this.conversionErrors += "Unsupported Algebra type OpReduced\n";
   }
 
+  @Override
+  public void visit(OpDistinct opDistinct) {
+    this.isQueryConversionSuccesful = false;
+    this.conversionErrors += "Unsupported Algebra type OpDistinct\n";
+  }
 
   @Override
   public void visit(OpSlice opSlice) {

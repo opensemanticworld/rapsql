@@ -54,15 +54,14 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TranspilerTest {
-  // extern postgres age service auth (default) !test database dependency
+public class Sp2bTest {
   // private static final String DB_URL = "jdbc:postgresql://sysarch.digital.isc.fraunhofer.de:5444/postgres";
   private static final String DB_URL = "jdbc:postgresql://localhost:5432/rapsql";
   private static final String USER = "postgres";
   private static final String PASS = "postgres";
   // test parameter
   private static final String GRAPH_NAME = "junit-test";
-  private static final String PATH_NAME = "src/test/resources/ttl-sparql";
+  private static final String PATH_NAME = "src/test/resources/sp2b";
 
   // provide test resources of rdf model, rdf-cypher model, sparql queries
   private static List<Arguments> MethodProvider() throws IOException {
@@ -76,7 +75,7 @@ public class TranspilerTest {
     List<Arguments> method_args = new LinkedList<Arguments>();
     for (File folder_ : files) {
       String folder = folder_.getCanonicalPath();
-      Path rdf_path = Paths.get(folder, "rdf.ttl");
+      Path rdf_path = Paths.get(folder, "rdf.n3");
             
       // create RDF to Cypher model from ttl
       Model rdf_model = RDFDataMgr.loadModel(rdf_path.toString());
@@ -131,6 +130,7 @@ public class TranspilerTest {
       Statement stmt = conn.createStatement(); 
       stmt.execute("LOAD 'age';");
       stmt.execute("SET search_path = ag_catalog, \"$user\", public;");
+
       stmt.execute(rdf_to_cypher); // rdf to cypher data mapping here
       System.out.println("-------- SUCCESS AGE RDF IMPORT  --------\n");
     } catch (SQLException e) { 
@@ -161,6 +161,7 @@ public class TranspilerTest {
       for(String col: results.getResultVars()) {
         sparql_res.put(col, row.get(col).toString());
       }
+      System.out.println("-------- SPARQL RESULT --------\n" + sparql_res + "\n");
       sparql_res_map.add(sparql_res); // add result to sparql result list
     }
 
@@ -175,6 +176,8 @@ public class TranspilerTest {
       Assumptions.assumeTrue(false, e.getMessage());
       return;
     }
+
+    // cypher_query = "SELECT * FROM ag_catalog.cypher('rdf-graph', $$ MATCH (article)-[{uri:'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'}]->({uri:'http://localhost/vocabulary/bench/Article'}),(article)-[property]->(value) WHERE property.value = 'http://swrc.ontoware.org/ontology#pages' RETURN article.stringrep $$) AS (article ag_catalog.agtype);";
 
     // connect to postgres to perform test on transformed cypher query
     try ( Connection conn = DriverManager.getConnection(DB_URL, USER, PASS) ) {
@@ -191,6 +194,7 @@ public class TranspilerTest {
           res.put(rsmd.getColumnName(i), rs.getString(i).replace("\"", ""));
         }
         cypher_res_map.add(res);
+        System.out.println("-------- CYPHER RESULT --------\n" + res + "\n");
       }
     } catch (SQLException e) { 
       fail("CYPHER FAILED WITH EXCEPTION\n"
